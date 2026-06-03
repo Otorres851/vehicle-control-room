@@ -26,5 +26,22 @@
       "english": "Inglés",
       "spanish": "Español"
     }
+  },
+  "monitor": {
+    "loading": "Cargando monitor vehicular",
+    "eyebrow": "Monitor en vivo",
+    "title": "Telemetría del vehículo",
+    "vehicle": "Vehículo",
+    "name": "Nombre",
+    "connection": "Conexión",
+    "speed": "Velocidad",
+    "lastUpdate": "Última actualización",
+    "noVehicle": "Ningún vehículo seleccionado",
+    "error": {
+      "eyebrow": "Conexión no disponible",
+      "title": "No pudimos conectar con el servidor demo de Traccar.",
+      "description": "El servidor público puede estar caído, bloqueado por CORS o rechazando las credenciales demo.",
+      "retry": "Reintentar conexión"
+    }
   }
 }

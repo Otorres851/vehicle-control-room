@@ -8,7 +8,7 @@ export function usePositions(isEnabled: boolean) {
     queryFn: getPositions,
     enabled: isEnabled,
 
-    // Polling keeps the monitor close to real time without requiring WebSockets.
+    // Polling keeps the dashboard synchronized without requiring WebSocket support.
     refetchInterval: 5_000,
   });
 }

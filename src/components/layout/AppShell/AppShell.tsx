@@ -1,5 +1,6 @@
 import { Activity, Languages, Moon, SunMedium } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { VehicleMonitorPanel } from "../../../features/vehicle-monitor/components/VehicleMonitorPanel";
 
 import { useTheme } from "../../../hooks/useTheme";
 
@@ -103,6 +104,7 @@ export function AppShell() {
           </dl>
         </div>
       </section>
+      <VehicleMonitorPanel />
     </main>
   );
 }

@@ -1,0 +1,168 @@
+.panel {
+  width: min(1180px, 100%);
+  margin: var(--space-6) auto 0;
+  padding: var(--space-6);
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.06), transparent),
+    var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-card);
+}
+
+.panelHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
+}
+
+.eyebrow,
+.errorEyebrow {
+  color: var(--color-primary);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.title,
+.errorTitle {
+  margin-top: var(--space-1);
+  color: var(--color-text);
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  letter-spacing: -0.04em;
+}
+
+.selector {
+  display: grid;
+  gap: var(--space-2);
+  min-width: min(18rem, 100%);
+  color: var(--color-text-muted);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.selector select {
+  min-height: 2.9rem;
+  padding: 0 var(--space-4);
+  color: var(--color-text);
+  background: var(--color-surface-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.statusGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--space-4);
+}
+
+.statusGrid div {
+  padding: var(--space-4);
+  background: var(--color-surface-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+}
+
+.statusGrid dt {
+  color: var(--color-text-muted);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.statusGrid dd {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+  color: var(--color-text);
+  font-size: 1.1rem;
+  font-weight: 800;
+}
+
+.statusDot {
+  width: 0.65rem;
+  height: 0.65rem;
+  background: var(--color-offline);
+  border-radius: var(--radius-full);
+}
+
+.statusDot[data-status="online"] {
+  background: var(--color-success);
+  box-shadow: 0 0 0 0.35rem
+    color-mix(in srgb, var(--color-success) 18%, transparent);
+}
+
+.statusDot[data-status="offline"] {
+  background: var(--color-offline);
+}
+
+.errorText {
+  max-width: 42rem;
+  margin-top: var(--space-3);
+  color: var(--color-text-soft);
+  line-height: 1.7;
+}
+
+.retryButton {
+  min-height: 2.8rem;
+  margin-top: var(--space-5);
+  padding: 0 var(--space-5);
+  color: var(--color-bg);
+  font-weight: 800;
+  background: var(--color-primary);
+  border: 0;
+  border-radius: var(--radius-full);
+}
+
+.skeletonHeader,
+.skeletonGrid div {
+  overflow: hidden;
+  background: var(--color-surface-elevated);
+  border-radius: var(--radius-lg);
+}
+
+.skeletonHeader {
+  width: min(28rem, 100%);
+  height: 4rem;
+}
+
+.skeletonGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-4);
+  margin-top: var(--space-6);
+}
+
+.skeletonGrid div {
+  height: 8rem;
+}
+
+@media (max-width: 860px) {
+  .panelHeader {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .statusGrid,
+  .skeletonGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .panel {
+    padding: var(--space-4);
+  }
+
+  .statusGrid,
+  .skeletonGrid {
+    grid-template-columns: 1fr;
+  }
+}

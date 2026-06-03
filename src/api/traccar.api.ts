@@ -29,10 +29,11 @@ export type TraccarPosition = {
   attributes?: Record<string, unknown>;
 };
 
+// Traccar creates a session cookie after successful authentication.
 export async function createSession() {
   const body = new URLSearchParams({
-    email: "admin",
-    password: "admin",
+    email: import.meta.env.VITE_TRACCAR_EMAIL,
+    password: import.meta.env.VITE_TRACCAR_PASSWORD,
   });
 
   const response = await httpClient.post<TraccarSession>(
@@ -43,12 +44,14 @@ export async function createSession() {
   return response.data;
 }
 
+// Retrieves the fleet devices available to the authenticated operator.
 export async function getDevices() {
   const response = await httpClient.get<TraccarDevice[]>(ENDPOINTS.devices);
 
   return response.data;
 }
 
+// Retrieves the latest known positions for all tracked devices.
 export async function getPositions() {
   const response = await httpClient.get<TraccarPosition[]>(ENDPOINTS.positions);
 

@@ -4,6 +4,7 @@ import { initReactI18next } from "react-i18next";
 import en from "./locales/en.json";
 import es from "./locales/es.json";
 
+// Restore the previously selected language if available.
 const savedLanguage = localStorage.getItem("language") || "en";
 
 void i18n.use(initReactI18next).init({

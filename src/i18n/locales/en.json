@@ -26,5 +26,22 @@
       "english": "English",
       "spanish": "Spanish"
     }
+  },
+  "monitor": {
+    "loading": "Loading vehicle monitor",
+    "eyebrow": "Live monitor",
+    "title": "Vehicle telemetry",
+    "vehicle": "Vehicle",
+    "name": "Name",
+    "connection": "Connection",
+    "speed": "Speed",
+    "lastUpdate": "Last update",
+    "noVehicle": "No vehicle selected",
+    "error": {
+      "eyebrow": "Connection unavailable",
+      "title": "We could not reach the Traccar demo server.",
+      "description": "The public server may be down, blocked by CORS, or rejecting demo credentials.",
+      "retry": "Retry connection"
+    }
   }
 }
