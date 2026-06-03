@@ -42,6 +42,10 @@
       "title": "No pudimos conectar con el servidor demo de Traccar.",
       "description": "El servidor público puede estar caído, bloqueado por CORS o rechazando las credenciales demo.",
       "retry": "Reintentar conexión"
+    },
+    "emptyPosition": {
+      "title": "Esperando señal GPS",
+      "description": "El vehículo seleccionado existe, pero Traccar todavía no ha recibido una posición válida."
     }
   }
 }

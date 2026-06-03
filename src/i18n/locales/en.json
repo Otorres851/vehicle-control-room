@@ -42,6 +42,10 @@
       "title": "We could not reach the Traccar demo server.",
       "description": "The public server may be down, blocked by CORS, or rejecting demo credentials.",
       "retry": "Retry connection"
+    },
+    "emptyPosition": {
+      "title": "Waiting for GPS signal",
+      "description": "The selected vehicle exists, but Traccar has not received a valid position yet."
     }
   }
 }

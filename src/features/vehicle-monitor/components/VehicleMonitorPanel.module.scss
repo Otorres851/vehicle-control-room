@@ -144,6 +144,26 @@
   height: 8rem;
 }
 
+.emptyPosition {
+  display: grid;
+  gap: var(--space-1);
+  margin-top: var(--space-4);
+  padding: var(--space-4);
+  background: var(--color-primary-soft);
+  border: 1px solid
+    color-mix(in srgb, var(--color-primary) 24%, var(--color-border));
+  border-radius: var(--radius-lg);
+}
+
+.emptyPosition strong {
+  color: var(--color-text);
+}
+
+.emptyPosition span {
+  color: var(--color-text-soft);
+  line-height: 1.6;
+}
+
 @media (max-width: 860px) {
   .panelHeader {
     align-items: stretch;

@@ -1,11 +1,18 @@
 import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { VehicleMap } from "./VehicleMap";
 
 import { useDevices } from "../hooks/useDevices";
 import { usePositions } from "../hooks/usePositions";
 import { useTraccarSession } from "../hooks/useTraccarSession";
 
 import styles from "./VehicleMonitorPanel.module.scss";
+
+import {
+  formatConnectionStatus,
+  formatSpeedFromKnots,
+  formatTime,
+} from "../utils/formatters";
 
 export function VehicleMonitorPanel() {
   const { t } = useTranslation();
@@ -125,28 +132,31 @@ export function VehicleMonitorPanel() {
               className={styles.statusDot}
               data-status={selectedDevice?.status}
             />
-            {selectedDevice?.status ?? "unknown"}
+            {formatConnectionStatus(selectedDevice?.status)}
           </dd>
         </div>
 
         <div>
           <dt>{t("monitor.speed")}</dt>
-          <dd>
-            {selectedPosition
-              ? `${Math.round(selectedPosition.speed * 1.852)} km/h`
-              : "—"}
-          </dd>
+          <dd>{formatSpeedFromKnots(selectedPosition?.speed)}</dd>
         </div>
 
         <div>
           <dt>{t("monitor.lastUpdate")}</dt>
           <dd>
-            {selectedPosition?.fixTime
-              ? new Date(selectedPosition.fixTime).toLocaleTimeString()
-              : "—"}
+            {formatTime(
+              selectedPosition?.fixTime ?? selectedDevice?.lastUpdate,
+            )}
           </dd>
         </div>
       </dl>
+      {!selectedPosition ? (
+        <div className={styles.emptyPosition} role="status">
+          <strong>{t("monitor.emptyPosition.title")}</strong>
+          <span>{t("monitor.emptyPosition.description")}</span>
+        </div>
+      ) : null}
+      <VehicleMap position={selectedPosition} />
     </section>
   );
 }
