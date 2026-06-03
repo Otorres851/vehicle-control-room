@@ -1,0 +1,30 @@
+{
+  "app": {
+    "eyebrow": "Fleet operations",
+    "title": "Vehicle Control Room",
+    "theme": {
+      "dark": "Dark",
+      "light": "Light",
+      "switchToLight": "Switch to light mode",
+      "switchToDark": "Switch to dark mode"
+    },
+    "hero": {
+      "kicker": "Real-time GPS monitoring",
+      "title": "High-clarity vehicle monitoring for long control-room shifts.",
+      "description": "Track live position, connection status, speed and last update with a resilient, accessible and polished interface."
+    },
+    "preview": {
+      "gateway": "Traccar demo gateway",
+      "apiMode": "API mode",
+      "pollingReady": "Polling ready",
+      "mapEngine": "Map engine",
+      "accessibility": "Accessibility",
+      "wcag": "WCAG AA target"
+    },
+    "language": {
+      "label": "Language",
+      "english": "English",
+      "spanish": "Spanish"
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "app": {
+    "eyebrow": "Operaciones de flota",
+    "title": "Vehicle Control Room",
+    "theme": {
+      "dark": "Oscuro",
+      "light": "Claro",
+      "switchToLight": "Cambiar a modo claro",
+      "switchToDark": "Cambiar a modo oscuro"
+    },
+    "hero": {
+      "kicker": "Monitoreo GPS en tiempo real",
+      "title": "Monitoreo vehicular de alta claridad para turnos largos en sala de control.",
+      "description": "Supervisa ubicación en vivo, estado de conexión, velocidad y última actualización mediante una interfaz resiliente, accesible y pulida."
+    },
+    "preview": {
+      "gateway": "Gateway demo de Traccar",
+      "apiMode": "Modo API",
+      "pollingReady": "Polling listo",
+      "mapEngine": "Motor de mapa",
+      "accessibility": "Accesibilidad",
+      "wcag": "Objetivo WCAG AA"
+    },
+    "language": {
+      "label": "Idioma",
+      "english": "Inglés",
+      "spanish": "Español"
+    }
+  }
+}
