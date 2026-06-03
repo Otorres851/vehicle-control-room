@@ -8,11 +8,7 @@ import { useTraccarSession } from "../hooks/useTraccarSession";
 
 import styles from "./VehicleMonitorPanel.module.scss";
 
-import {
-  formatConnectionStatus,
-  formatSpeedFromKnots,
-  formatTime,
-} from "../utils/formatters";
+import { StatusCard } from "./StatusCard";
 
 export function VehicleMonitorPanel() {
   const { t } = useTranslation();
@@ -91,6 +87,20 @@ export function VehicleMonitorPanel() {
     );
   }
 
+  if (!devices.length) {
+    return (
+      <section className={styles.panel} role="status">
+        <p className={styles.errorEyebrow}>
+          {t("monitor.emptyDevices.eyebrow")}
+        </p>
+        <h2 className={styles.errorTitle}>{t("monitor.emptyDevices.title")}</h2>
+        <p className={styles.errorText}>
+          {t("monitor.emptyDevices.description")}
+        </p>
+      </section>
+    );
+  }
+
   return (
     <section className={styles.panel} aria-labelledby="monitor-title">
       <div className={styles.panelHeader}>
@@ -119,44 +129,12 @@ export function VehicleMonitorPanel() {
         </label>
       </div>
 
-      <dl className={styles.statusGrid} aria-live="polite">
-        <div>
-          <dt>{t("monitor.name")}</dt>
-          <dd>{selectedDevice?.name ?? t("monitor.noVehicle")}</dd>
-        </div>
-
-        <div>
-          <dt>{t("monitor.connection")}</dt>
-          <dd>
-            <span
-              className={styles.statusDot}
-              data-status={selectedDevice?.status}
-            />
-            {formatConnectionStatus(selectedDevice?.status)}
-          </dd>
-        </div>
-
-        <div>
-          <dt>{t("monitor.speed")}</dt>
-          <dd>{formatSpeedFromKnots(selectedPosition?.speed)}</dd>
-        </div>
-
-        <div>
-          <dt>{t("monitor.lastUpdate")}</dt>
-          <dd>
-            {formatTime(
-              selectedPosition?.fixTime ?? selectedDevice?.lastUpdate,
-            )}
-          </dd>
-        </div>
-      </dl>
-      {!selectedPosition ? (
-        <div className={styles.emptyPosition} role="status">
-          <strong>{t("monitor.emptyPosition.title")}</strong>
-          <span>{t("monitor.emptyPosition.description")}</span>
-        </div>
-      ) : null}
-      <VehicleMap position={selectedPosition} />
+      <StatusCard device={selectedDevice} position={selectedPosition} />
+      <VehicleMap
+        position={selectedPosition}
+        emptyTitle={t("monitor.emptyPosition.title")}
+        emptyDescription={t("monitor.emptyPosition.description")}
+      />
     </section>
   );
 }

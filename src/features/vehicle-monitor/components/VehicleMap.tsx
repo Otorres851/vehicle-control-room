@@ -3,16 +3,23 @@ import { useEffect, useMemo } from "react";
 import { MapContainer, Marker, TileLayer, useMap } from "react-leaflet";
 
 import type { TraccarPosition } from "../../../api/traccar.api";
+import { useSmoothedPosition } from "../hooks/useSmoothedPosition";
 
 import styles from "./VehicleMap.module.scss";
 
 type VehicleMapProps = {
   position: TraccarPosition | null;
+  emptyTitle: string;
+  emptyDescription: string;
 };
 
 const DEFAULT_CENTER: [number, number] = [4.711, -74.0721];
 
-function MapController({ position }: VehicleMapProps) {
+type MapControllerProps = {
+  position: TraccarPosition | null;
+};
+
+function MapController({ position }: MapControllerProps) {
   const map = useMap();
 
   useEffect(() => {
@@ -27,9 +34,14 @@ function MapController({ position }: VehicleMapProps) {
   return null;
 }
 
-export function VehicleMap({ position }: VehicleMapProps) {
-  const center: [number, number] = position
-    ? [position.latitude, position.longitude]
+export function VehicleMap({
+  position,
+  emptyTitle,
+  emptyDescription,
+}: VehicleMapProps) {
+  const smoothedPosition = useSmoothedPosition(position);
+  const center: [number, number] = smoothedPosition
+    ? [smoothedPosition.latitude, smoothedPosition.longitude]
     : DEFAULT_CENTER;
 
   const vehicleIcon = useMemo(() => {
@@ -60,11 +72,11 @@ export function VehicleMap({ position }: VehicleMapProps) {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
 
-        <MapController position={position} />
+        <MapController position={smoothedPosition} />
 
-        {position ? (
+        {smoothedPosition ? (
           <Marker
-            position={[position.latitude, position.longitude]}
+            position={[smoothedPosition.latitude, smoothedPosition.longitude]}
             icon={vehicleIcon}
           />
         ) : null}
@@ -72,11 +84,8 @@ export function VehicleMap({ position }: VehicleMapProps) {
 
       {!position ? (
         <div className={styles.emptyState}>
-          <p>Waiting for GPS signal</p>
-          <span>
-            The selected device is online, but no position has been received
-            yet.
-          </span>
+          <p>{emptyTitle}</p>
+          <span>{emptyDescription}</span>
         </div>
       ) : null}
     </section>

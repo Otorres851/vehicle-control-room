@@ -46,6 +46,11 @@
     "emptyPosition": {
       "title": "Esperando señal GPS",
       "description": "El vehículo seleccionado existe, pero Traccar todavía no ha recibido una posición válida."
+    },
+    "emptyDevices": {
+      "eyebrow": "No hay vehículos disponibles",
+      "title": "Crea un dispositivo en Traccar para empezar a monitorear.",
+      "description": "La conexión con la API funciona, pero esta cuenta todavía no tiene vehículos asignados."
     }
   }
 }
