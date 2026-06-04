@@ -14,6 +14,12 @@ importers:
       '@fontsource/geist-mono':
         specifier: ^5.2.8
         version: 5.2.8
+      '@fontsource/inter':
+        specifier: ^5.2.8
+        version: 5.2.8
+      '@fontsource/space-grotesk':
+        specifier: ^5.2.10
+        version: 5.2.10
       '@tanstack/react-query':
         specifier: ^5.100.14
         version: 5.100.14(react@19.2.7)
@@ -217,6 +223,12 @@ packages:
 
   '@fontsource/geist@5.2.9':
     resolution: {integrity: sha512-6QMur8g+3/9Uvfv/5chLJGBc9bYVzWijFrWEl0uZnitxp6wEPqKCJd9/GBlOk4dg/QSe96a3TUKEgmscFpE+4g==}
+
+  '@fontsource/inter@5.2.8':
+    resolution: {integrity: sha512-P6r5WnJoKiNVV+zvW2xM13gNdFhAEpQ9dQJHt3naLvfg+LkF2ldgSLiF4T41lf1SQCM9QmkqPTn4TH568IRagg==}
+
+  '@fontsource/space-grotesk@5.2.10':
+    resolution: {integrity: sha512-XNXEbT74OIITPqw2H6HXwPDp85fy43uxfBwFR5PU+9sLnjuLj12KlhVM9nZVN6q6dlKjkuN8JisW/OBxwxgUew==}
 
   '@humanfs/core@0.19.2':
     resolution: {integrity: sha512-UhXNm+CFMWcbChXywFwkmhqjs3PRCmcSa/hfBgLIb7oQ5HNb1wS0icWsGtSAUNgefHeI+eBrA8I1fxmbHsGdvA==}
@@ -1436,6 +1448,10 @@ snapshots:
   '@fontsource/geist-mono@5.2.8': {}
 
   '@fontsource/geist@5.2.9': {}
+
+  '@fontsource/inter@5.2.8': {}
+
+  '@fontsource/space-grotesk@5.2.10': {}
 
   '@humanfs/core@0.19.2':
     dependencies:

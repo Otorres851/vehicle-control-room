@@ -1,14 +1,20 @@
+import { Clock, Gauge, MapPinned, Radio, Satellite } from "lucide-react";
 import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { VehicleMap } from "./VehicleMap";
 
 import { useDevices } from "../hooks/useDevices";
 import { usePositions } from "../hooks/usePositions";
 import { useTraccarSession } from "../hooks/useTraccarSession";
-
-import styles from "./VehicleMonitorPanel.module.scss";
+import {
+  formatConnectionStatus,
+  formatSpeedFromKnots,
+  formatTime,
+} from "../utils/formatters";
 
 import { StatusCard } from "./StatusCard";
+import { VehicleMap } from "./VehicleMap";
+
+import styles from "./VehicleMonitorPanel.module.scss";
 
 export function VehicleMonitorPanel() {
   const { t } = useTranslation();
@@ -49,8 +55,10 @@ export function VehicleMonitorPanel() {
     );
   }, [positions, activeDeviceId]);
 
+  const gpsAccuracy = selectedPosition?.accuracy;
   const isLoading = sessionQuery.isLoading || devicesQuery.isLoading;
   const isError = sessionQuery.isError || devicesQuery.isError;
+  const isOnline = selectedDevice?.status === "online";
 
   if (isLoading) {
     return (
@@ -110,8 +118,12 @@ export function VehicleMonitorPanel() {
   }
 
   return (
-    <section className={styles.panel} aria-labelledby="monitor-title">
-      <div className={styles.panelHeader}>
+    <section
+      id="map"
+      className={styles.dashboard}
+      aria-labelledby="monitor-title"
+    >
+      <header className={styles.dashboardHeader}>
         <div>
           <p className={styles.eyebrow}>{t("monitor.eyebrow")}</p>
           <h2 id="monitor-title" className={styles.title}>
@@ -141,20 +153,104 @@ export function VehicleMonitorPanel() {
             ))}
           </select>
         </label>
+      </header>
+
+      <div className={styles.kpiGrid} aria-label="Vehicle key metrics">
+        <article className={styles.kpiCard}>
+          <div className={styles.kpiIcon} data-tone="blue">
+            <Radio size={20} />
+          </div>
+          <span>{t("monitor.connection")}</span>
+          <strong>{formatConnectionStatus(selectedDevice?.status)}</strong>
+          <small>{isOnline ? "Live signal" : "No active signal"}</small>
+        </article>
+
+        <article className={styles.kpiCard}>
+          <div className={styles.kpiIcon} data-tone="green">
+            <Gauge size={20} />
+          </div>
+          <span>{t("monitor.speed")}</span>
+          <strong>{formatSpeedFromKnots(selectedPosition?.speed)}</strong>
+          <small>{selectedPosition ? "GPS telemetry" : "Waiting data"}</small>
+        </article>
+
+        <article className={styles.kpiCard}>
+          <div className={styles.kpiIcon} data-tone="purple">
+            <Satellite size={20} />
+          </div>
+          <span>{t("monitor.statusCard.accuracy")}</span>
+          <strong>
+            {typeof gpsAccuracy === "number"
+              ? `${Math.round(gpsAccuracy)} m`
+              : "—"}
+          </strong>
+          <small>Position quality</small>
+        </article>
+
+        <article className={styles.kpiCard}>
+          <div className={styles.kpiIcon} data-tone="amber">
+            <Clock size={20} />
+          </div>
+          <span>{t("monitor.lastUpdate")}</span>
+          <strong>
+            {formatTime(
+              selectedPosition?.fixTime ?? selectedDevice?.lastUpdate,
+            )}
+          </strong>
+          <small>Polling cada 5 segundos</small>
+        </article>
       </div>
 
-      <StatusCard device={selectedDevice} position={selectedPosition} />
       {positionsQuery.isError ? (
         <div className={styles.inlineError} role="alert">
           <strong>{t("monitor.positionsError.title")}</strong>
           <span>{t("monitor.positionsError.description")}</span>
         </div>
       ) : null}
-      <VehicleMap
-        position={selectedPosition}
-        emptyTitle={t("monitor.emptyPosition.title")}
-        emptyDescription={t("monitor.emptyPosition.description")}
-      />
+
+      <div className={styles.monitorGrid}>
+        <div className={styles.mapArea}>
+          <div className={styles.mapToolbar}>
+            <div>
+              <strong>{t("map.title", "Mapa en vivo")}</strong>
+              <span>{selectedDevice?.name}</span>
+            </div>
+
+            <span
+              className={styles.livePill}
+              data-active={Boolean(selectedPosition)}
+            >
+              <span />
+              {selectedPosition ? "GPS locked" : "Waiting GPS"}
+            </span>
+          </div>
+
+          <VehicleMap
+            position={selectedPosition}
+            emptyTitle={t("monitor.emptyPosition.title")}
+            emptyDescription={t("monitor.emptyPosition.description")}
+          />
+        </div>
+
+        <aside
+          className={styles.sidePanel}
+          aria-label="Selected vehicle details"
+        >
+          <header className={styles.vehicleSummary}>
+            <span
+              className={styles.summaryStatus}
+              data-status={selectedDevice?.status}
+            />
+            <div>
+              <strong>{selectedDevice?.name}</strong>
+              <small>{selectedDevice?.uniqueId}</small>
+            </div>
+            <MapPinned size={18} />
+          </header>
+
+          <StatusCard device={selectedDevice} position={selectedPosition} />
+        </aside>
+      </div>
     </section>
   );
 }

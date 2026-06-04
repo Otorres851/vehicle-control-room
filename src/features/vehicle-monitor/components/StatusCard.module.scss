@@ -1,8 +1,13 @@
 .card {
-  padding: var(--space-6);
-  margin-top: var(--space-5);
+  padding: var(--space-5);
+  margin-top: 0;
   background:
-    linear-gradient(145deg, rgba(255, 255, 255, 0.07), transparent),
+    radial-gradient(
+      circle at 90% 8%,
+      rgba(29, 155, 240, 0.12),
+      transparent 14rem
+    ),
+    linear-gradient(145deg, rgba(255, 255, 255, 0.065), transparent),
     var(--color-surface-elevated);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-xl);
@@ -14,12 +19,12 @@
   align-items: flex-start;
   justify-content: space-between;
   gap: var(--space-4);
-  margin-bottom: var(--space-6);
+  margin-bottom: var(--space-5);
 }
 
 .eyebrow {
   color: var(--color-primary);
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   font-weight: 800;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -28,9 +33,10 @@
 .vehicleName {
   margin-top: var(--space-1);
   color: var(--color-text);
-  font-size: clamp(1.6rem, 3vw, 2.35rem);
-  line-height: 1;
-  letter-spacing: -0.05em;
+  font-family: var(--font-heading);
+  font-size: clamp(1.8rem, 4vw, 2.65rem);
+  line-height: 0.95;
+  letter-spacing: -0.06em;
 }
 
 .badge {
@@ -41,10 +47,10 @@
   padding: 0 var(--space-3);
   color: var(--color-text-soft);
   font-family: var(--font-mono);
-  font-size: 0.78rem;
-  font-weight: 700;
+  font-size: 0.75rem;
+  font-weight: 800;
   text-transform: uppercase;
-  background: var(--color-surface);
+  background: color-mix(in srgb, var(--color-surface) 88%, transparent);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-full);
 }
@@ -61,19 +67,16 @@
   animation: statusPulse 1.8s infinite;
 }
 
-.statusDot[data-status="offline"] {
-  background: var(--color-offline);
-}
-
 .grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: var(--space-4);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-3);
 }
 
 .metric,
 .metricWide {
   min-width: 0;
+  min-height: 7.6rem;
   padding: var(--space-4);
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.045), transparent),
@@ -98,40 +101,41 @@
 
 .metricWide {
   grid-column: span 2;
+  min-height: 6.25rem;
 }
 
 .metric dt,
 .metricWide dt {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   gap: var(--space-2);
   color: var(--color-text-muted);
-  font-size: 0.74rem;
+  font-size: 0.68rem;
   font-weight: 800;
-  letter-spacing: 0.1em;
+  line-height: 1.25;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
-.metric dt svg {
+.metric dt svg,
+.metricWide dt svg {
+  flex: 0 0 auto;
   color: var(--color-primary);
 }
 
 .metric dd,
 .metricWide dd {
+  display: block;
+  max-width: 100%;
   margin-top: var(--space-3);
   overflow: hidden;
   color: var(--color-text);
   font-family: var(--font-mono);
-  font-size: clamp(1rem, 1.6vw, 1.2rem);
-  font-weight: 700;
+  font-size: clamp(1.15rem, 2vw, 1.45rem);
+  font-weight: 800;
+  line-height: 1.1;
   text-overflow: ellipsis;
   white-space: nowrap;
-}
-
-.metric:first-child dd {
-  font-size: clamp(1.75rem, 4vw, 2.75rem);
-  line-height: 1;
-  letter-spacing: -0.06em;
 }
 
 @keyframes statusPulse {
@@ -149,13 +153,23 @@
   }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1180px) {
+  .grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .metricWide {
+    grid-column: span 3;
+  }
+}
+
+@media (max-width: 760px) {
   .grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .metricWide {
-    grid-column: span 1;
+    grid-column: span 2;
   }
 }
 
@@ -170,6 +184,10 @@
 
   .grid {
     grid-template-columns: 1fr;
+  }
+
+  .metricWide {
+    grid-column: span 1;
   }
 
   .badge {

@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Battery, Gauge, Navigation, Radar } from "lucide-react";
+import { Clock, Gauge, Navigation, Radar } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 import type { TraccarDevice, TraccarPosition } from "../../../api/traccar.api";
@@ -17,15 +17,6 @@ type StatusCardProps = {
   position: TraccarPosition | null;
 };
 
-function getNumberAttribute(
-  attributes: Record<string, unknown> | undefined,
-  key: string,
-) {
-  const value = attributes?.[key];
-
-  return typeof value === "number" ? value : null;
-}
-
 function getStringAttribute(
   attributes: Record<string, unknown> | undefined,
   key: string,
@@ -38,7 +29,6 @@ function getStringAttribute(
 export function StatusCard({ device, position }: StatusCardProps) {
   const { t } = useTranslation();
 
-  const batteryLevel = getNumberAttribute(position?.attributes, "batteryLevel");
   const accuracy = position?.accuracy;
   const activity = getStringAttribute(position?.attributes, "activity");
   const isOnline = device?.status === "online";
@@ -48,6 +38,7 @@ export function StatusCard({ device, position }: StatusCardProps) {
       <header className={styles.header}>
         <div>
           <p className={styles.eyebrow}>{t("monitor.statusCard.eyebrow")}</p>
+
           <h3 id="status-card-title" className={styles.vehicleName}>
             {device?.name ?? t("monitor.noVehicle")}
           </h3>
@@ -65,6 +56,7 @@ export function StatusCard({ device, position }: StatusCardProps) {
             <Gauge size={16} aria-hidden="true" />
             {t("monitor.speed")}
           </dt>
+
           <dd>
             <motion.span
               key={position?.speed}
@@ -79,19 +71,10 @@ export function StatusCard({ device, position }: StatusCardProps) {
 
         <div className={styles.metric}>
           <dt>
-            <Battery size={16} aria-hidden="true" />
-            {t("monitor.statusCard.battery")}
-          </dt>
-          <dd>
-            {batteryLevel !== null ? `${Math.round(batteryLevel)}%` : "—"}
-          </dd>
-        </div>
-
-        <div className={styles.metric}>
-          <dt>
             <Radar size={16} aria-hidden="true" />
             {t("monitor.statusCard.activity")}
           </dt>
+
           <dd>{activity ?? (isOnline ? "active" : "offline")}</dd>
         </div>
 
@@ -100,13 +83,18 @@ export function StatusCard({ device, position }: StatusCardProps) {
             <Navigation size={16} aria-hidden="true" />
             {t("monitor.statusCard.accuracy")}
           </dt>
+
           <dd>
             {typeof accuracy === "number" ? `${Math.round(accuracy)} m` : "—"}
           </dd>
         </div>
 
-        <div className={styles.metricWide}>
-          <dt>{t("monitor.lastUpdate")}</dt>
+        <div className={styles.metric}>
+          <dt>
+            <Clock size={16} aria-hidden="true" />
+            {t("monitor.lastUpdate")}
+          </dt>
+
           <dd>
             <motion.span
               key={position?.fixTime ?? device?.lastUpdate}
