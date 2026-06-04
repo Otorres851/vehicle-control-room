@@ -118,15 +118,6 @@ export function StatusCard({ device, position }: StatusCardProps) {
             </motion.span>
           </dd>
         </div>
-
-        <div className={styles.metricWide}>
-          <dt>{t("monitor.statusCard.coordinates")}</dt>
-          <dd>
-            {position
-              ? `${position.latitude.toFixed(5)}, ${position.longitude.toFixed(5)}`
-              : "—"}
-          </dd>
-        </div>
       </dl>
     </article>
   );

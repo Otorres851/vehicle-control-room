@@ -66,7 +66,6 @@ export function VehicleMonitorPanel() {
           <div />
           <div />
           <div className={styles.skeletonWide} />
-          <div className={styles.skeletonWide} />
         </div>
 
         <div className={styles.skeletonMap} />
@@ -125,7 +124,7 @@ export function VehicleMonitorPanel() {
           </p>
         </div>
 
-        <label htmlFor="vehicle-selector" className={styles.selector}>
+        <label className={styles.selector} htmlFor="vehicle-selector">
           <span>{t("monitor.vehicle")}</span>
 
           <select

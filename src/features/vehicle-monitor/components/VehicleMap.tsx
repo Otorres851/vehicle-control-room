@@ -78,6 +78,7 @@ export function VehicleMap({
 
       <div className={styles.mapShell}>
         <MapContainer
+          keyboard
           center={center}
           zoom={position ? 15 : 11}
           className={styles.map}
@@ -94,6 +95,7 @@ export function VehicleMap({
             <Marker
               position={[smoothedPosition.latitude, smoothedPosition.longitude]}
               icon={vehicleIcon}
+              alt="Selected vehicle current location"
             />
           ) : null}
         </MapContainer>

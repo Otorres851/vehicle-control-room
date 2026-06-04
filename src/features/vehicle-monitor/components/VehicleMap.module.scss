@@ -74,6 +74,15 @@
   height: 100%;
 }
 
+.mapCard:focus-within {
+  border-color: color-mix(
+    in srgb,
+    var(--color-primary) 45%,
+    var(--color-border)
+  );
+  box-shadow: var(--shadow-focus);
+}
+
 .marker {
   color: var(--color-primary);
 }

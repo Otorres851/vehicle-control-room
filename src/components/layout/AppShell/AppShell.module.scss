@@ -56,12 +56,13 @@
 
 .brand {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: var(--space-4);
 }
 
 .logo {
   display: grid;
+  flex: 0 0 auto;
   width: 3rem;
   height: 3rem;
   place-items: center;
@@ -177,7 +178,7 @@
   z-index: 1;
   max-width: 13ch;
   color: var(--color-text);
-  font-size: clamp(2.35rem, 6vw, 5.4rem);
+  font-size: clamp(2.35rem, 16vw, 4rem);
   line-height: 0.92;
   letter-spacing: -0.075em;
 }
