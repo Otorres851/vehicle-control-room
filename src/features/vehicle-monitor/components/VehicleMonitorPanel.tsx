@@ -109,12 +109,18 @@ export function VehicleMonitorPanel() {
           <h2 id="monitor-title" className={styles.title}>
             {t("monitor.title")}
           </h2>
+          <p className={styles.refreshState} role="status" aria-live="polite">
+            {positionsQuery.isFetching
+              ? t("monitor.refreshing")
+              : t("monitor.synced")}
+          </p>
         </div>
 
-        <label className={styles.selector}>
+        <label htmlFor="vehicle-selector" className={styles.selector}>
           <span>{t("monitor.vehicle")}</span>
 
           <select
+            id="vehicle-selector"
             value={selectedDevice?.id ?? ""}
             onChange={(event) =>
               setSelectedDeviceId(Number(event.target.value))
@@ -130,6 +136,12 @@ export function VehicleMonitorPanel() {
       </div>
 
       <StatusCard device={selectedDevice} position={selectedPosition} />
+      {positionsQuery.isError ? (
+        <div className={styles.inlineError} role="alert">
+          <strong>{t("monitor.positionsError.title")}</strong>
+          <span>{t("monitor.positionsError.description")}</span>
+        </div>
+      ) : null}
       <VehicleMap
         position={selectedPosition}
         emptyTitle={t("monitor.emptyPosition.title")}

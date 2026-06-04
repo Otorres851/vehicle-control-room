@@ -51,6 +51,12 @@
       "eyebrow": "No hay vehículos disponibles",
       "title": "Crea un dispositivo en Traccar para empezar a monitorear.",
       "description": "La conexión con la API funciona, pero esta cuenta todavía no tiene vehículos asignados."
-    }
+    },
+    "positionsError": {
+      "title": "Flujo de posición no disponible",
+      "description": "Los datos del vehículo cargaron correctamente, pero el endpoint de posición no está respondiendo ahora."
+    },
+    "refreshing": "Actualizando telemetría en vivo…",
+    "synced": "Telemetría sincronizada"
   }
 }

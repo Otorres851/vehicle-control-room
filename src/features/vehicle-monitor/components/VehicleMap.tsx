@@ -60,7 +60,11 @@ export function VehicleMap({
   }, [position?.course]);
 
   return (
-    <section className={styles.mapCard} aria-label="Vehicle location map">
+    <section className={styles.mapCard} aria-labelledby="vehicle-map-title">
+      <h3 id="vehicle-map-title" className={styles.srOnly}>
+        Vehicle location map
+      </h3>
+
       <MapContainer
         center={center}
         zoom={position ? 15 : 11}

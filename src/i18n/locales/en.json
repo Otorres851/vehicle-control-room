@@ -51,6 +51,12 @@
       "eyebrow": "No vehicles available",
       "title": "Create a device in Traccar to start monitoring.",
       "description": "The API connection is working, but this account does not have vehicles assigned yet."
-    }
+    },
+    "positionsError": {
+      "title": "Position stream unavailable",
+      "description": "Vehicle data loaded correctly, but the position endpoint is not responding right now."
+    },
+    "refreshing": "Updating live telemetry…",
+    "synced": "Telemetry synchronized"
   }
 }

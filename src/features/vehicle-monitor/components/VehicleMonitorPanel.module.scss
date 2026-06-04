@@ -96,6 +96,38 @@
   height: 8rem;
 }
 
+.inlineError {
+  display: grid;
+  gap: var(--space-1);
+  margin-top: var(--space-4);
+  padding: var(--space-4);
+  background: color-mix(in srgb, var(--color-danger) 12%, var(--color-surface));
+  border: 1px solid
+    color-mix(in srgb, var(--color-danger) 35%, var(--color-border));
+  border-radius: var(--radius-lg);
+}
+
+.inlineError strong {
+  color: var(--color-text);
+}
+
+.inlineError span {
+  color: var(--color-text-soft);
+  line-height: 1.6;
+}
+
+.refreshState {
+  margin-top: var(--space-2);
+  color: var(--color-text-muted);
+  font-size: 0.875rem;
+}
+
+.selector select:focus-visible,
+.retryButton:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
 @media (max-width: 860px) {
   .panelHeader {
     align-items: stretch;
