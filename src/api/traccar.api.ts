@@ -26,6 +26,10 @@ export type TraccarPosition = {
   fixTime: string;
   deviceTime: string;
   serverTime: string;
+  accuracy?: number;
+  altitude?: number;
+  address?: string | null;
+  valid?: boolean;
   attributes?: Record<string, unknown>;
 };
 

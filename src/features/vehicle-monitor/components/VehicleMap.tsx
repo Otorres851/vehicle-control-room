@@ -40,6 +40,7 @@ export function VehicleMap({
   emptyDescription,
 }: VehicleMapProps) {
   const smoothedPosition = useSmoothedPosition(position);
+
   const center: [number, number] = smoothedPosition
     ? [smoothedPosition.latitude, smoothedPosition.longitude]
     : DEFAULT_CENTER;
@@ -54,44 +55,63 @@ export function VehicleMap({
           </svg>
         </div>
       `,
-      iconSize: [42, 42],
-      iconAnchor: [21, 21],
+      iconSize: [46, 46],
+      iconAnchor: [23, 23],
     });
   }, [position?.course]);
 
   return (
     <section className={styles.mapCard} aria-labelledby="vehicle-map-title">
-      <h3 id="vehicle-map-title" className={styles.srOnly}>
-        Vehicle location map
-      </h3>
-
-      <MapContainer
-        center={center}
-        zoom={position ? 15 : 11}
-        className={styles.map}
-        scrollWheelZoom
-      >
-        <TileLayer
-          attribution="&copy; OpenStreetMap contributors"
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
-
-        <MapController position={smoothedPosition} />
-
-        {smoothedPosition ? (
-          <Marker
-            position={[smoothedPosition.latitude, smoothedPosition.longitude]}
-            icon={vehicleIcon}
-          />
-        ) : null}
-      </MapContainer>
-
-      {!position ? (
-        <div className={styles.emptyState}>
-          <p>{emptyTitle}</p>
-          <span>{emptyDescription}</span>
+      <div className={styles.mapHeader}>
+        <div>
+          <p className={styles.eyebrow}>Live location</p>
+          <h3 id="vehicle-map-title" className={styles.title}>
+            Interactive GPS map
+          </h3>
         </div>
-      ) : null}
+
+        <span className={styles.signalBadge} data-active={Boolean(position)}>
+          <span />
+          {position ? "GPS locked" : "Waiting signal"}
+        </span>
+      </div>
+
+      <div className={styles.mapShell}>
+        <MapContainer
+          center={center}
+          zoom={position ? 15 : 11}
+          className={styles.map}
+          scrollWheelZoom
+        >
+          <TileLayer
+            attribution="&copy; OpenStreetMap contributors"
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          />
+
+          <MapController position={smoothedPosition} />
+
+          {smoothedPosition ? (
+            <Marker
+              position={[smoothedPosition.latitude, smoothedPosition.longitude]}
+              icon={vehicleIcon}
+            />
+          ) : null}
+        </MapContainer>
+
+        {position ? (
+          <div className={styles.coordinatesCard}>
+            <span>Coordinates</span>
+            <strong>
+              {position.latitude.toFixed(5)}, {position.longitude.toFixed(5)}
+            </strong>
+          </div>
+        ) : (
+          <div className={styles.emptyState}>
+            <p>{emptyTitle}</p>
+            <span>{emptyDescription}</span>
+          </div>
+        )}
+      </div>
     </section>
   );
 }

@@ -57,6 +57,13 @@
       "description": "Los datos del vehículo cargaron correctamente, pero el endpoint de posición no está respondiendo ahora."
     },
     "refreshing": "Actualizando telemetría en vivo…",
-    "synced": "Telemetría sincronizada"
+    "synced": "Telemetría sincronizada",
+    "statusCard": {
+      "eyebrow": "Vehículo seleccionado",
+      "battery": "Batería",
+      "activity": "Actividad",
+      "accuracy": "Precisión GPS",
+      "coordinates": "Coordenadas"
+    }
   }
 }

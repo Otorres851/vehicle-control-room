@@ -55,12 +55,21 @@ export function VehicleMonitorPanel() {
   if (isLoading) {
     return (
       <section className={styles.panel} aria-label={t("monitor.loading")}>
-        <div className={styles.skeletonHeader} />
-        <div className={styles.skeletonGrid}>
-          <div />
-          <div />
-          <div />
+        <div className={styles.skeletonTop}>
+          <div className={styles.skeletonTitle} />
+          <div className={styles.skeletonBadge} />
         </div>
+
+        <div className={styles.skeletonMetrics}>
+          <div />
+          <div />
+          <div />
+          <div />
+          <div className={styles.skeletonWide} />
+          <div className={styles.skeletonWide} />
+        </div>
+
+        <div className={styles.skeletonMap} />
       </section>
     );
   }

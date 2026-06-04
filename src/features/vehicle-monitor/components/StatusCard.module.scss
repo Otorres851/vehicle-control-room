@@ -1,46 +1,52 @@
-.statusGrid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: var(--space-4);
-}
-
-.statusGrid div {
-  padding: var(--space-4);
-  background: var(--color-surface-elevated);
+.card {
+  padding: var(--space-6);
+  margin-top: var(--space-5);
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.07), transparent),
+    var(--color-surface-elevated);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  transition:
-    transform 180ms ease,
-    border-color 180ms ease,
-    box-shadow 180ms ease;
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-card);
 }
 
-.statusGrid div:hover {
-  transform: translateY(-2px);
-  border-color: color-mix(
-    in srgb,
-    var(--color-primary) 35%,
-    var(--color-border)
-  );
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
 }
 
-.statusGrid dt {
-  color: var(--color-text-muted);
+.eyebrow {
+  color: var(--color-primary);
   font-size: 0.75rem;
   font-weight: 800;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
 }
 
-.statusGrid dd {
-  display: flex;
+.vehicleName {
+  margin-top: var(--space-1);
+  color: var(--color-text);
+  font-size: clamp(1.6rem, 3vw, 2.35rem);
+  line-height: 1;
+  letter-spacing: -0.05em;
+}
+
+.badge {
+  display: inline-flex;
   align-items: center;
   gap: var(--space-2);
-  margin-top: var(--space-2);
-  color: var(--color-text);
+  min-height: 2.35rem;
+  padding: 0 var(--space-3);
+  color: var(--color-text-soft);
   font-family: var(--font-mono);
-  font-size: 1.1rem;
-  font-weight: 800;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
 }
 
 .statusDot {
@@ -59,6 +65,75 @@
   background: var(--color-offline);
 }
 
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--space-4);
+}
+
+.metric,
+.metricWide {
+  min-width: 0;
+  padding: var(--space-4);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.045), transparent),
+    var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.metric:hover,
+.metricWide:hover {
+  transform: translateY(-2px);
+  border-color: color-mix(
+    in srgb,
+    var(--color-primary) 35%,
+    var(--color-border)
+  );
+}
+
+.metricWide {
+  grid-column: span 2;
+}
+
+.metric dt,
+.metricWide dt {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--color-text-muted);
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.metric dt svg {
+  color: var(--color-primary);
+}
+
+.metric dd,
+.metricWide dd {
+  margin-top: var(--space-3);
+  overflow: hidden;
+  color: var(--color-text);
+  font-family: var(--font-mono);
+  font-size: clamp(1rem, 1.6vw, 1.2rem);
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.metric:first-child dd {
+  font-size: clamp(1.75rem, 4vw, 2.75rem);
+  line-height: 1;
+  letter-spacing: -0.06em;
+}
+
 @keyframes statusPulse {
   0% {
     box-shadow: 0 0 0 0
@@ -74,14 +149,31 @@
   }
 }
 
-@media (max-width: 860px) {
-  .statusGrid {
-    grid-template-columns: 1fr 1fr;
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .metricWide {
+    grid-column: span 1;
   }
 }
 
 @media (max-width: 560px) {
-  .statusGrid {
+  .card {
+    padding: var(--space-4);
+  }
+
+  .header {
+    flex-direction: column;
+  }
+
+  .grid {
     grid-template-columns: 1fr;
+  }
+
+  .badge {
+    width: 100%;
+    justify-content: center;
   }
 }

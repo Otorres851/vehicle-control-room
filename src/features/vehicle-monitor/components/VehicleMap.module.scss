@@ -1,29 +1,77 @@
 .mapCard {
-  position: relative;
-  width: min(1180px, 100%);
-  height: clamp(24rem, 56vw, 38rem);
-  margin: var(--space-6) auto 0;
-  overflow: hidden;
-  background: var(--color-surface);
+  width: 100%;
+  margin-top: var(--space-6);
+  padding: var(--space-5);
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.06), transparent),
+    var(--color-surface-elevated);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-xl);
   box-shadow: var(--shadow-card);
 }
 
+.mapHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  margin-bottom: var(--space-4);
+}
+
+.eyebrow {
+  color: var(--color-primary);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.title {
+  margin-top: var(--space-1);
+  color: var(--color-text);
+  font-size: clamp(1.25rem, 2vw, 1.65rem);
+  letter-spacing: -0.04em;
+}
+
+.signalBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 2.4rem;
+  padding: 0 var(--space-3);
+  color: var(--color-text-soft);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+}
+
+.signalBadge span {
+  width: 0.65rem;
+  height: 0.65rem;
+  background: var(--color-offline);
+  border-radius: var(--radius-full);
+}
+
+.signalBadge[data-active="true"] span {
+  background: var(--color-success);
+  animation: gpsPulse 1.8s infinite;
+}
+
+.mapShell {
+  position: relative;
+  height: clamp(24rem, 55vw, 36rem);
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+}
+
 .map {
   width: 100%;
   height: 100%;
-}
-
-.srOnly {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
 }
 
 .marker {
@@ -32,29 +80,49 @@
 
 .markerShell {
   display: grid;
-  width: 2.625rem;
-  height: 2.625rem;
+  width: 2.875rem;
+  height: 2.875rem;
   place-items: center;
   color: var(--color-primary);
-  background: var(--color-primary-soft);
+  background:
+    radial-gradient(circle, rgba(255, 255, 255, 0.9), transparent 58%),
+    var(--color-primary-soft);
   border: 1px solid var(--color-primary);
   border-radius: var(--radius-full);
   box-shadow:
-    0 0 0 0.5rem var(--color-primary-soft),
-    0 1rem 2rem rgba(0, 0, 0, 0.25);
+    0 0 0 0.55rem var(--color-primary-soft),
+    0 1rem 2rem rgba(0, 0, 0, 0.28);
 }
 
+.coordinatesCard,
 .emptyState {
   position: absolute;
-  right: var(--space-6);
-  bottom: var(--space-6);
+  right: var(--space-4);
+  bottom: var(--space-4);
   z-index: 500;
-  max-width: 22rem;
+  max-width: min(24rem, calc(100% - 2rem));
   padding: var(--space-4);
-  background: var(--color-surface);
+  background: color-mix(in srgb, var(--color-surface) 88%, transparent);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-card);
+  backdrop-filter: blur(16px);
+}
+
+.coordinatesCard span {
+  color: var(--color-text-muted);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.coordinatesCard strong {
+  display: block;
+  margin-top: var(--space-1);
+  color: var(--color-text);
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
 }
 
 .emptyState p {
@@ -67,4 +135,46 @@
   margin-top: var(--space-1);
   color: var(--color-text-muted);
   line-height: 1.5;
+}
+
+@keyframes gpsPulse {
+  0% {
+    box-shadow: 0 0 0 0
+      color-mix(in srgb, var(--color-success) 42%, transparent);
+  }
+
+  70% {
+    box-shadow: 0 0 0 0.75rem transparent;
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 transparent;
+  }
+}
+
+@media (max-width: 640px) {
+  .mapCard {
+    padding: var(--space-4);
+  }
+
+  .mapHeader {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .signalBadge {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .mapShell {
+    height: 22rem;
+  }
+
+  .coordinatesCard,
+  .emptyState {
+    right: var(--space-3);
+    bottom: var(--space-3);
+    left: var(--space-3);
+  }
 }

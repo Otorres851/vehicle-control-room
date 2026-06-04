@@ -73,27 +73,79 @@
   border-radius: var(--radius-full);
 }
 
-.skeletonHeader,
-.skeletonGrid div {
+.skeletonTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+.skeletonTitle,
+.skeletonBadge,
+.skeletonMetrics div,
+.skeletonMap {
+  position: relative;
   overflow: hidden;
-  background: var(--color-surface-elevated);
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.04), transparent),
+    var(--color-surface-elevated);
+  border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
 }
 
-.skeletonHeader {
-  width: min(28rem, 100%);
-  height: 4rem;
+.skeletonTitle::after,
+.skeletonBadge::after,
+.skeletonMetrics div::after,
+.skeletonMap::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in srgb, var(--color-primary) 12%, transparent),
+    transparent
+  );
+  transform: translateX(-100%);
+  animation: shimmer 1.6s infinite;
 }
 
-.skeletonGrid {
+.skeletonTitle {
+  width: min(24rem, 100%);
+  height: 5rem;
+}
+
+.skeletonBadge {
+  width: 7rem;
+  height: 2.6rem;
+  border-radius: var(--radius-full);
+}
+
+.skeletonMetrics {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: var(--space-4);
   margin-top: var(--space-6);
 }
 
-.skeletonGrid div {
-  height: 8rem;
+.skeletonMetrics div {
+  height: 7rem;
+}
+
+.skeletonWide {
+  grid-column: span 2;
+}
+
+.skeletonMap {
+  width: 100%;
+  height: 28rem;
+  margin-top: var(--space-6);
+}
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
 }
 
 .inlineError {
@@ -128,15 +180,20 @@
   outline-offset: 2px;
 }
 
+@media (max-width: 900px) {
+  .skeletonMetrics {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .skeletonWide {
+    grid-column: span 1;
+  }
+}
+
 @media (max-width: 860px) {
   .panelHeader {
     align-items: stretch;
     flex-direction: column;
-  }
-
-  .statusGrid,
-  .skeletonGrid {
-    grid-template-columns: 1fr 1fr;
   }
 }
 
@@ -145,8 +202,20 @@
     padding: var(--space-4);
   }
 
-  .statusGrid,
-  .skeletonGrid {
+  .skeletonTop {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .skeletonBadge {
+    width: 100%;
+  }
+
+  .skeletonMetrics {
     grid-template-columns: 1fr;
+  }
+
+  .skeletonMap {
+    height: 18rem;
   }
 }

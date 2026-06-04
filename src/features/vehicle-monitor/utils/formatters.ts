@@ -1,14 +1,25 @@
 const KNOT_TO_KMH = 1.852;
+const MIN_VISIBLE_SPEED_KMH = 3;
 
 export function formatSpeedFromKnots(speedInKnots?: number) {
-  if (typeof speedInKnots !== "number") return "—";
+  if (typeof speedInKnots !== "number") {
+    return "—";
+  }
 
-  // Traccar reports speed in knots. Operators read speed more naturally in km/h.
-  return `${Math.round(speedInKnots * KNOT_TO_KMH)} km/h`;
+  const speedKmh = speedInKnots * KNOT_TO_KMH;
+
+  // GPS sensors can report tiny speed fluctuations while the vehicle is stationary.
+  if (speedKmh < MIN_VISIBLE_SPEED_KMH) {
+    return "0 km/h";
+  }
+
+  return `${Math.round(speedKmh)} km/h`;
 }
 
 export function formatTime(value?: string | null) {
-  if (!value) return "—";
+  if (!value) {
+    return "—";
+  }
 
   return new Intl.DateTimeFormat(undefined, {
     hour: "2-digit",
@@ -18,7 +29,9 @@ export function formatTime(value?: string | null) {
 }
 
 export function formatConnectionStatus(status?: string) {
-  if (!status) return "unknown";
+  if (!status) {
+    return "unknown";
+  }
 
   return status;
 }
