@@ -1,5 +1,4 @@
 import { useTranslation } from "react-i18next";
-
 import type { TraccarDevice, TraccarPosition } from "../../../api/traccar.api";
 
 import {
@@ -8,6 +7,7 @@ import {
   formatTime,
 } from "../utils/formatters";
 
+import { motion } from "framer-motion";
 import styles from "./StatusCard.module.scss";
 
 type StatusCardProps = {
@@ -35,12 +35,30 @@ export function StatusCard({ device, position }: StatusCardProps) {
 
       <div>
         <dt>{t("monitor.speed")}</dt>
-        <dd>{formatSpeedFromKnots(position?.speed)}</dd>
+        <dd>
+          <motion.span
+            key={position?.speed}
+            initial={{ opacity: 0.4, y: 4 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.25 }}
+          >
+            {formatSpeedFromKnots(position?.speed)}
+          </motion.span>
+        </dd>
       </div>
 
       <div>
         <dt>{t("monitor.lastUpdate")}</dt>
-        <dd>{formatTime(position?.fixTime ?? device?.lastUpdate)}</dd>
+        <dd>
+          <motion.span
+            key={position?.fixTime}
+            initial={{ opacity: 0.4 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.25 }}
+          >
+            {formatTime(position?.fixTime ?? device?.lastUpdate)}
+          </motion.span>
+        </dd>
       </div>
     </dl>
   );
