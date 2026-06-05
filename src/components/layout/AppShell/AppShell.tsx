@@ -1,5 +1,6 @@
 import {
   Activity,
+  ArrowRight,
   Bell,
   Car,
   Languages,
@@ -13,6 +14,7 @@ import {
 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
+import heroVehicle from "../../../assets/images/hero-vehicle.png";
 import { VehicleMonitorPanel } from "../../../features/vehicle-monitor/components/VehicleMonitorPanel";
 import { useTheme } from "../../../hooks/useTheme";
 
@@ -51,27 +53,27 @@ export function AppShell() {
         <nav className={styles.nav} aria-label="Primary navigation">
           <a className={styles.navItemActive} href="#overview">
             <LayoutDashboard size={18} />
-            Resumen
+            {t("app.nav.overview")}
           </a>
 
           <a className={styles.navItem} href="#monitor">
             <Radio size={18} />
-            Monitoreo
+            {t("app.nav.monitoring")}
           </a>
 
           <a className={styles.navItem} href="#map">
             <MapPinned size={18} />
-            Mapa
+            {t("app.nav.map")}
           </a>
 
           <a className={styles.navItem} href="#vehicles">
             <Car size={18} />
-            Vehículos
+            {t("app.nav.vehicles")}
           </a>
 
           <a className={styles.navItem} href="#settings">
             <Settings size={18} />
-            Configuración
+            {t("app.nav.settings")}
           </a>
         </nav>
 
@@ -79,7 +81,7 @@ export function AppShell() {
           <div className={styles.avatar}>AD</div>
           <div>
             <strong>Admin Demo</strong>
-            <span>Operador activo</span>
+            <span>{t("app.operator.active")}</span>
           </div>
         </div>
       </aside>
@@ -127,21 +129,27 @@ export function AppShell() {
         <section id="overview" className={styles.overview}>
           <article className={styles.heroCard}>
             <span className={styles.liveBadge}>
-              <span />
-              En tiempo real
+              <span className={styles.liveDot} />
+              {t("app.hero.primaryAction")}
             </span>
 
             <h2>{t("app.hero.title")}</h2>
             <p>{t("app.hero.description")}</p>
 
+            <div className={styles.vehicleVisual} aria-hidden="true">
+              <img src={heroVehicle} alt="" />
+              <span className={styles.radarRing} />
+            </div>
+
             <div className={styles.heroActions}>
-              <a href="#monitor" className={styles.primaryAction}>
-                Ir al monitoreo
+              <a href="#monitor" className={styles.terciaryAction}>
+                {t("app.hero.terciaryAction")}
+                <ArrowRight size={16} aria-hidden="true" />
               </a>
 
               <a href="#map" className={styles.secondaryAction}>
-                Ver mapa
-                <MapPinned size={16} />
+                {t("app.hero.secondaryAction")}
+                <MapPinned size={16} aria-hidden="true" />
               </a>
             </div>
           </article>
@@ -153,7 +161,7 @@ export function AppShell() {
                 <h2>{t("app.preview.gateway")}</h2>
               </div>
 
-              <span>Conectado</span>
+              <span>{t("app.preview.connected")}</span>
             </header>
 
             <div className={styles.systemMetrics}>

@@ -43,16 +43,11 @@ body::after {
 }
 
 body::before {
-  position: fixed;
   top: 8rem;
   right: 12rem;
-  z-index: 0;
   width: 28rem;
   height: 28rem;
-  pointer-events: none;
-  content: "";
   border: 1px solid rgba(29, 155, 240, 0.16);
-  border-radius: 999px;
   box-shadow:
     0 0 0 4rem rgba(29, 155, 240, 0.03),
     0 0 0 8rem rgba(29, 155, 240, 0.02),
@@ -61,16 +56,11 @@ body::before {
 }
 
 body::after {
-  position: fixed;
   bottom: 8rem;
   left: 8rem;
-  z-index: 0;
   width: 18rem;
   height: 18rem;
-  pointer-events: none;
-  content: "";
   background: rgba(34, 197, 94, 0.16);
-  border-radius: 999px;
   filter: blur(48px);
   animation: ambientFloat 7s ease-in-out infinite alternate;
 }
@@ -119,4 +109,13 @@ select:focus-visible,
 a:focus-visible {
   outline: none;
   box-shadow: var(--shadow-focus);
+}
+
+button,
+.primaryAction,
+.secondaryAction,
+.terciaryAction,
+.themeToggle,
+.retryButton {
+  transition: transform 0.2s ease;
 }

@@ -8,13 +8,27 @@
       "switchToLight": "Switch to light mode",
       "switchToDark": "Switch to dark mode"
     },
+    "nav": {
+      "overview": "Overview",
+      "monitoring": "Monitoring",
+      "map": "Map",
+      "vehicles": "Vehicles",
+      "settings": "Settings"
+    },
+    "operator": {
+      "active": "Active operator"
+    },
     "hero": {
       "kicker": "Real-time GPS monitoring",
-      "title": "High-clarity vehicle monitoring for long control-room shifts.",
-      "description": "Track live position, connection status, speed and last update with a resilient, accessible and polished interface."
+      "title": "Intelligent vehicle monitoring.",
+      "description": "Track live position, connection status, speed and last update with a resilient, accessible and polished interface.",
+      "primaryAction": "IN REAL TIME",
+      "secondaryAction": "View map",
+      "terciaryAction": "Go to monitoring"
     },
     "preview": {
       "gateway": "Traccar demo gateway",
+      "connected": "Connected",
       "apiMode": "API mode",
       "pollingReady": "Polling ready",
       "mapEngine": "Map engine",

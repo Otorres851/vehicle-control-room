@@ -8,13 +8,27 @@
       "switchToLight": "Cambiar a modo claro",
       "switchToDark": "Cambiar a modo oscuro"
     },
+    "nav": {
+      "overview": "Resumen",
+      "monitoring": "Monitoreo",
+      "map": "Mapa",
+      "vehicles": "Vehículos",
+      "settings": "Configuración"
+    },
+    "operator": {
+      "active": "Operador activo"
+    },
     "hero": {
       "kicker": "Monitoreo GPS en tiempo real",
-      "title": "Monitoreo vehicular de alta claridad para turnos largos en sala de control.",
-      "description": "Supervisa ubicación en vivo, estado de conexión, velocidad y última actualización mediante una interfaz resiliente, accesible y pulida."
+      "title": "Monitoreo vehicular inteligente.",
+      "description": "Supervisa ubicación en vivo, estado de conexión, velocidad y última actualización mediante una interfaz resiliente, accesible y pulida.",
+      "primaryAction": "EN TIEMPO REAL",
+      "secondaryAction": "Ver mapa",
+      "terciaryAction": "Ir a monitoreo"
     },
     "preview": {
       "gateway": "Gateway demo de Traccar",
+      "connected": "Conectado",
       "apiMode": "Modo API",
       "pollingReady": "Polling listo",
       "mapEngine": "Motor de mapa",

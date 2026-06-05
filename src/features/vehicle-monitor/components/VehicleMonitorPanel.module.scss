@@ -452,11 +452,6 @@
     padding: var(--space-4);
   }
 
-  .kpiGrid,
-  .skeletonMetrics {
-    grid-template-columns: 1fr;
-  }
-
   .mapToolbar {
     align-items: flex-start;
     flex-direction: column;
