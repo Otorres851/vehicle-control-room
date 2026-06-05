@@ -1,7 +1,14 @@
-import { Clock, Gauge, MapPinned, Radio, Satellite } from "lucide-react";
-import { useMemo, useState } from "react";
-import { useTranslation } from "react-i18next";
+import {
+  ChevronDown,
+  Clock,
+  Gauge,
+  MapPinned,
+  Radio,
+  Satellite,
+} from "lucide-react";
 
+import { useEffect, useMemo, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useDevices } from "../hooks/useDevices";
 import { usePositions } from "../hooks/usePositions";
 import { useTraccarSession } from "../hooks/useTraccarSession";
@@ -10,10 +17,8 @@ import {
   formatSpeedFromKnots,
   formatTime,
 } from "../utils/formatters";
-
 import { StatusCard } from "./StatusCard";
 import { VehicleMap } from "./VehicleMap";
-
 import styles from "./VehicleMonitorPanel.module.scss";
 
 export function VehicleMonitorPanel() {
@@ -26,6 +31,8 @@ export function VehicleMonitorPanel() {
 
   const devicesQuery = useDevices(isAuthenticated);
   const [selectedDeviceId, setSelectedDeviceId] = useState<number | null>(null);
+  const [isVehicleOpen, setIsVehicleOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   const devices = useMemo(() => devicesQuery.data ?? [], [devicesQuery.data]);
 
@@ -59,6 +66,32 @@ export function VehicleMonitorPanel() {
   const isLoading = sessionQuery.isLoading || devicesQuery.isLoading;
   const isError = sessionQuery.isError || devicesQuery.isError;
   const isOnline = selectedDevice?.status === "online";
+
+  // Close vehicle list
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsVehicleOpen(false);
+      }
+    };
+
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setIsVehicleOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("keydown", handleEscape);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("keydown", handleEscape);
+    };
+  }, []);
 
   if (isLoading) {
     return (
@@ -136,23 +169,66 @@ export function VehicleMonitorPanel() {
           </p>
         </div>
 
-        <label className={styles.selector} htmlFor="vehicle-selector">
-          <span>{t("monitor.vehicle")}</span>
+        <div className={styles.vehicleSelector}>
+          <span className={styles.selectorLabel}>{t("monitor.vehicle")}</span>
 
-          <select
-            id="vehicle-selector"
-            value={selectedDevice?.id ?? ""}
-            onChange={(event) =>
-              setSelectedDeviceId(Number(event.target.value))
-            }
-          >
-            {devices.map((device) => (
-              <option key={device.id} value={device.id}>
-                {device.name}
-              </option>
-            ))}
-          </select>
-        </label>
+          <div ref={dropdownRef} className={styles.vehicleDropdown}>
+            <button
+              type="button"
+              className={styles.vehicleTrigger}
+              onClick={() => setIsVehicleOpen((current) => !current)}
+              aria-expanded={isVehicleOpen}
+              aria-haspopup="listbox"
+              aria-label={t("monitor.vehicle")}
+            >
+              <span
+                className={styles.vehicleStatusDot}
+                data-status={selectedDevice?.status}
+              />
+
+              <span className={styles.vehicleTriggerText}>
+                <strong>
+                  {selectedDevice?.name ?? t("monitor.noVehicle")}
+                </strong>
+                <small>{formatConnectionStatus(selectedDevice?.status)}</small>
+              </span>
+
+              <ChevronDown
+                size={18}
+                className={styles.chevron}
+                data-open={isVehicleOpen}
+                aria-hidden="true"
+              />
+            </button>
+
+            {isVehicleOpen ? (
+              <div className={styles.vehicleMenu} role="listbox">
+                {devices.map((device) => (
+                  <button
+                    key={device.id}
+                    type="button"
+                    role="option"
+                    aria-selected={device.id === selectedDevice?.id}
+                    onClick={() => {
+                      setSelectedDeviceId(device.id);
+                      setIsVehicleOpen(false);
+                    }}
+                  >
+                    <span
+                      className={styles.vehicleStatusDot}
+                      data-status={device.status}
+                    />
+
+                    <span>
+                      <strong>{device.name}</strong>
+                      <small>{formatConnectionStatus(device.status)}</small>
+                    </span>
+                  </button>
+                ))}
+              </div>
+            ) : null}
+          </div>
+        </div>
       </header>
 
       <div className={styles.kpiGrid} aria-label="Vehicle key metrics">

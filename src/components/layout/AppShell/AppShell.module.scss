@@ -160,51 +160,89 @@
   gap: var(--space-3);
 }
 
-.languageControl,
+.languageDropdown {
+  position: relative;
+}
+
 .themeToggle {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: var(--space-2);
+
   min-height: 2.75rem;
   padding: 0 var(--space-4);
+
   color: var(--color-text);
   background: color-mix(
     in srgb,
     var(--color-surface-elevated) 88%,
     transparent
   );
+
   border: 1px solid var(--color-border);
   border-radius: var(--radius-full);
+
   box-shadow: var(--shadow-card);
   backdrop-filter: blur(16px);
-}
 
-.languageControl svg,
-.themeIcon {
-  color: var(--color-primary);
-}
-
-.languageControl select {
-  color: var(--color-text);
-  background: transparent;
-  border: 0;
-  outline: 0;
   cursor: pointer;
-}
 
-.themeToggle {
-  cursor: pointer;
-}
-
-.languageControl,
-.themeToggle {
   transition:
     transform 0.2s ease,
     border-color 0.2s ease;
 }
 
-.languageControl:hover,
 .themeToggle:hover {
+  transform: scale(1.02);
+  border-color: color-mix(
+    in srgb,
+    var(--color-primary) 35%,
+    var(--color-border)
+  );
+}
+
+.themeToggle:focus-visible {
+  outline: none;
+  border-color: color-mix(
+    in srgb,
+    var(--color-primary) 45%,
+    var(--color-border)
+  );
+  box-shadow: var(--shadow-focus);
+}
+
+.languageTrigger {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+
+  min-height: 2.75rem;
+  padding: 0 var(--space-4);
+
+  color: var(--color-text);
+
+  background: color-mix(
+    in srgb,
+    var(--color-surface-elevated) 88%,
+    transparent
+  );
+
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+
+  box-shadow: var(--shadow-card);
+  backdrop-filter: blur(16px);
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.languageTrigger:hover,
+.languageTrigger[aria-expanded="true"] {
   transform: scale(1.02);
 
   border-color: color-mix(
@@ -214,10 +252,58 @@
   );
 }
 
-.languageControl,
-.themeToggle,
-.languageControl select {
+.languageTrigger svg {
+  color: var(--color-primary);
+}
+
+.chevron {
+  transition: transform 0.2s ease;
+}
+
+.chevron[data-open="true"] {
+  transform: rotate(180deg);
+}
+
+.languageMenu {
+  position: absolute;
+  top: calc(100% + var(--space-2));
+  right: 0;
+
+  z-index: 999;
+
+  display: grid;
+  gap: 0.25rem;
+
+  min-width: 11rem;
+  padding: var(--space-2);
+
+  background: var(--color-surface-elevated);
+
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+
+  box-shadow: var(--shadow-card);
+}
+
+.languageMenu button {
+  min-height: 2.5rem;
+  padding: 0 var(--space-3);
+
+  color: var(--color-text-muted);
+  font-weight: 700;
+  text-align: left;
+
+  background: transparent;
+  border: 0;
+  border-radius: var(--radius-md);
+
   cursor: pointer;
+}
+
+.languageMenu button:hover,
+.languageMenu button[aria-selected="true"] {
+  color: var(--color-text);
+  background: var(--color-primary-soft);
 }
 
 .themeIcon {
@@ -589,10 +675,15 @@
     flex-direction: column;
   }
 
-  .languageControl,
+  .languageDropdown,
+  .languageTrigger,
+  .themeToggle {
+    width: 100%;
+  }
+
+  .languageTrigger,
   .themeToggle {
     justify-content: center;
-    width: 100%;
   }
 
   .nav {

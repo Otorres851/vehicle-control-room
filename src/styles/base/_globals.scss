@@ -105,10 +105,13 @@ textarea {
 }
 
 button:focus-visible,
-select:focus-visible,
 a:focus-visible {
   outline: none;
   box-shadow: var(--shadow-focus);
+}
+
+select:focus-visible {
+  outline: none;
 }
 
 button,

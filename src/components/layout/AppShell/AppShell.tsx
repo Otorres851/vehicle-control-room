@@ -3,6 +3,7 @@ import {
   ArrowRight,
   Bell,
   Car,
+  ChevronDown,
   Languages,
   LayoutDashboard,
   MapPinned,
@@ -12,6 +13,7 @@ import {
   ShieldCheck,
   SunMedium,
 } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import heroVehicle from "../../../assets/images/hero-vehicle.png";
@@ -26,15 +28,34 @@ export function AppShell() {
 
   const isDark = theme === "dark";
   const currentLanguage = i18n.language.startsWith("es") ? "es" : "en";
+  const [isLanguageOpen, setIsLanguageOpen] = useState(false);
+  const languageDropdownRef = useRef<HTMLDivElement>(null);
 
-  const handleLanguageChange = async (
-    event: React.ChangeEvent<HTMLSelectElement>,
-  ) => {
-    const nextLanguage = event.target.value;
+  // Close vehicle list
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        languageDropdownRef.current &&
+        !languageDropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsLanguageOpen(false);
+      }
+    };
 
-    await i18n.changeLanguage(nextLanguage);
-    localStorage.setItem("language", nextLanguage);
-  };
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setIsLanguageOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("keydown", handleEscape);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("keydown", handleEscape);
+    };
+  }, []);
 
   return (
     <main className={styles.shell}>
@@ -94,18 +115,55 @@ export function AppShell() {
           </div>
 
           <div className={styles.actions}>
-            <label className={styles.languageControl}>
-              <span className={styles.visuallyHidden}>
-                {t("app.language.label")}
-              </span>
+            <div ref={languageDropdownRef} className={styles.languageDropdown}>
+              <button
+                type="button"
+                className={styles.languageTrigger}
+                onClick={() => setIsLanguageOpen((current) => !current)}
+                aria-expanded={isLanguageOpen}
+                aria-haspopup="listbox"
+                aria-label={t("app.language.label")}
+              >
+                <Languages size={16} aria-hidden="true" />
+                <span>{currentLanguage.toUpperCase()}</span>
+                <ChevronDown
+                  size={16}
+                  className={styles.chevron}
+                  data-open={isLanguageOpen}
+                  aria-hidden="true"
+                />
+              </button>
 
-              <Languages size={16} aria-hidden="true" />
+              {isLanguageOpen ? (
+                <div className={styles.languageMenu} role="listbox">
+                  <button
+                    type="button"
+                    role="option"
+                    aria-selected={currentLanguage === "en"}
+                    onClick={() => {
+                      void i18n.changeLanguage("en");
+                      localStorage.setItem("language", "en");
+                      setIsLanguageOpen(false);
+                    }}
+                  >
+                    EN
+                  </button>
 
-              <select value={currentLanguage} onChange={handleLanguageChange}>
-                <option value="en">EN</option>
-                <option value="es">ES</option>
-              </select>
-            </label>
+                  <button
+                    type="button"
+                    role="option"
+                    aria-selected={currentLanguage === "es"}
+                    onClick={() => {
+                      void i18n.changeLanguage("es");
+                      localStorage.setItem("language", "es");
+                      setIsLanguageOpen(false);
+                    }}
+                  >
+                    ES
+                  </button>
+                </div>
+              ) : null}
+            </div>
 
             <button
               type="button"
