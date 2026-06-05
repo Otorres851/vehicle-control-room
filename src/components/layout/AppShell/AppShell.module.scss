@@ -103,14 +103,18 @@
   width: 2.5rem;
   height: 2.5rem;
   place-items: center;
-  color: white;
+
+  color: #ffffff;
+  font-size: 0.85rem;
   font-weight: 800;
-  background: linear-gradient(
-    135deg,
-    var(--color-primary),
-    var(--color-accent)
-  );
+
+  background: linear-gradient(135deg, var(--color-primary), #2563eb);
+
   border-radius: var(--radius-full);
+
+  box-shadow:
+    0 0.5rem 1rem rgba(37, 99, 235, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
 }
 
 .operatorCard strong {
@@ -252,7 +256,8 @@
   );
 }
 
-.languageTrigger svg {
+.languageTrigger svg,
+.themeIcon svg {
   color: var(--color-primary);
 }
 
@@ -521,7 +526,7 @@
 .systemCard {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-around;
   min-height: 26rem;
   padding: var(--space-6);
 }
@@ -550,12 +555,16 @@
 }
 
 .systemCard header span {
-  padding: var(--space-1) var(--space-3);
-  color: var(--color-accent);
+  padding: 0.45rem 1rem;
+
+  color: #22c55e;
   font-size: 0.8rem;
   font-weight: 800;
-  background: var(--color-accent-soft);
-  border-radius: var(--radius-full);
+
+  background: rgba(34, 197, 94, 0.12);
+  border: 1px solid rgba(34, 197, 94, 0.2);
+
+  border-radius: 999px;
 }
 
 .systemMetrics {
@@ -564,22 +573,77 @@
   margin-top: var(--space-6);
 }
 
-.systemMetrics div {
+.metricCard {
   display: grid;
-  grid-template-columns: auto 1fr auto;
-  gap: var(--space-3);
+  grid-template-columns: 3.25rem 1fr auto;
+  gap: var(--space-4);
   align-items: center;
-  padding: var(--space-4);
-  background: var(--color-surface-elevated);
+
+  min-height: 5.8rem;
+  padding: 0 var(--space-4);
+
+  background:
+    radial-gradient(
+      circle at 100% 0%,
+      rgba(29, 155, 240, 0.08),
+      transparent 12rem
+    ),
+    var(--color-surface-elevated);
+
   border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.metricCard:hover {
+  transform: translateY(-2px);
+  border-color: color-mix(
+    in srgb,
+    var(--color-primary) 30%,
+    var(--color-border)
+  );
+}
+
+.metricApi,
+.metricMap,
+.metricAccessibility {
+  display: grid;
+  width: 3.25rem;
+  height: 3.25rem;
+  place-items: center;
   border-radius: var(--radius-lg);
 }
 
-.systemMetrics svg {
-  color: var(--color-primary);
+.metricApi {
+  color: #38bdf8;
+  background: rgba(56, 189, 248, 0.14);
+  padding: 0.8rem;
 }
 
-.systemMetrics span {
+.metricMap {
+  color: #a855f7;
+  background: rgba(168, 85, 247, 0.14);
+  padding: 0.8rem;
+}
+
+.metricAccessibility {
+  color: #facc15;
+  background: rgba(250, 204, 21, 0.14);
+  padding: 0.8rem;
+}
+
+.metricBody {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-width: 0;
+}
+
+.metricBody span {
+  display: block;
   color: var(--color-text-muted);
   font-size: 0.75rem;
   font-weight: 800;
@@ -587,8 +651,18 @@
   text-transform: uppercase;
 }
 
-.systemMetrics strong {
+.metricBody strong {
+  display: block;
   color: var(--color-text);
+  font-size: 1.05rem;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.metricSuccess svg,
+.metricSuccess {
+  color: #22c55e !important;
+  stroke: #22c55e !important;
 }
 
 .visuallyHidden {
@@ -650,8 +724,18 @@
     position: relative;
     top: auto;
     right: auto;
-    width: min(32rem, 100%);
+    width: min(34rem, 100%);
     margin: var(--space-6) auto 0;
+    scale: 1;
+  }
+
+  .heroCard::before {
+    background: linear-gradient(
+      180deg,
+      var(--color-surface) 0%,
+      color-mix(in srgb, var(--color-surface) 88%, transparent) 52%,
+      transparent 100%
+    );
   }
 
   .heroCard h2,
@@ -667,12 +751,8 @@
   }
 
   .actions {
-    flex-direction: row;
-    align-items: center;
-  }
-
-  .heroActions {
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
   }
 
   .languageDropdown,
@@ -687,14 +767,51 @@
   }
 
   .nav {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .heroCard {
+    min-height: auto;
   }
 
   .heroCard h2 {
-    font-size: clamp(2.3rem, 14vw, 4rem);
+    font-size: clamp(2.4rem, 13vw, 4rem);
   }
 
-  .systemMetrics div {
+  .heroActions {
+    flex-direction: column;
+  }
+
+  .terciaryAction,
+  .secondaryAction {
+    width: 100%;
+  }
+
+  .metricCard {
+    grid-template-columns: 3rem 1fr auto;
+    padding: var(--space-4);
+  }
+}
+
+@media (max-width: 480px) {
+  .content {
+    padding: var(--space-3);
+  }
+
+  .sidebar {
+    padding: var(--space-3);
+  }
+
+  .nav {
     grid-template-columns: 1fr;
+  }
+
+  .heroCard,
+  .systemCard {
+    padding: var(--space-4);
+  }
+
+  .metricSuccess {
+    justify-self: start;
   }
 }

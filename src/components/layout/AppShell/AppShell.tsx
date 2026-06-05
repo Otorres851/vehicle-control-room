@@ -3,6 +3,7 @@ import {
   ArrowRight,
   Bell,
   Car,
+  CheckCircle,
   ChevronDown,
   Languages,
   LayoutDashboard,
@@ -31,7 +32,6 @@ export function AppShell() {
   const [isLanguageOpen, setIsLanguageOpen] = useState(false);
   const languageDropdownRef = useRef<HTMLDivElement>(null);
 
-  // Close vehicle list
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -188,7 +188,7 @@ export function AppShell() {
           <article className={styles.heroCard}>
             <span className={styles.liveBadge}>
               <span className={styles.liveDot} />
-              {t("app.hero.primaryAction")}
+              {t("app.hero.badge", "En tiempo real")}
             </span>
 
             <h2>{t("app.hero.title")}</h2>
@@ -223,22 +223,37 @@ export function AppShell() {
             </header>
 
             <div className={styles.systemMetrics}>
-              <div>
-                <Activity size={20} />
-                <span>{t("app.preview.apiMode")}</span>
-                <strong>{t("app.preview.pollingReady")}</strong>
+              <div className={styles.metricCard}>
+                <Activity size={20} className={styles.metricApi} />
+
+                <div className={styles.metricBody}>
+                  <span>{t("app.preview.apiMode")}</span>
+                  <strong>{t("app.preview.pollingReady")}</strong>
+                </div>
+
+                <CheckCircle size={22} className={styles.metricSuccess} />
               </div>
 
-              <div>
-                <MapPinned size={20} />
-                <span>{t("app.preview.mapEngine")}</span>
-                <strong>Leaflet</strong>
+              <div className={styles.metricCard}>
+                <MapPinned size={20} className={styles.metricMap} />
+
+                <div className={styles.metricBody}>
+                  <span>{t("app.preview.mapEngine")}</span>
+                  <strong>Leaflet</strong>
+                </div>
+
+                <CheckCircle size={18} className={styles.metricSuccess} />
               </div>
 
-              <div>
-                <Bell size={20} />
-                <span>{t("app.preview.accessibility")}</span>
-                <strong>{t("app.preview.wcag")}</strong>
+              <div className={styles.metricCard}>
+                <Bell size={20} className={styles.metricAccessibility} />
+
+                <div className={styles.metricBody}>
+                  <span>{t("app.preview.accessibility")}</span>
+                  <strong>{t("app.preview.wcag")}</strong>
+                </div>
+
+                <CheckCircle size={18} className={styles.metricSuccess} />
               </div>
             </div>
           </article>
