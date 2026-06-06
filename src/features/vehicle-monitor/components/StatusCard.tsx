@@ -46,7 +46,7 @@ export function StatusCard({ device, position }: StatusCardProps) {
 
         <span className={styles.badge} data-status={device?.status}>
           <span className={styles.statusDot} data-status={device?.status} />
-          {formatConnectionStatus(device?.status)}
+          {formatConnectionStatus(device?.status, t)}
         </span>
       </header>
 

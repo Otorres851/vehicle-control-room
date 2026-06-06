@@ -28,10 +28,17 @@ export function formatTime(value?: string | null) {
   }).format(new Date(value));
 }
 
-export function formatConnectionStatus(status?: string) {
-  if (!status) {
-    return "unknown";
-  }
+import type { TFunction } from "i18next";
 
-  return status;
+export function formatConnectionStatus(
+  status: string | undefined,
+  t: TFunction,
+) {
+  if (!status) return t("status.unknown");
+
+  const statusKey = status.toLowerCase();
+
+  return t(`status.${statusKey}`, {
+    defaultValue: status,
+  });
 }

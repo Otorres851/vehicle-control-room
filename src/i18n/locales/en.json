@@ -1,6 +1,6 @@
 {
   "app": {
-    "eyebrow": "Fleet operations",
+    "eyebrow": "Vehicle monitoring",
     "title": "Vehicle Control Room",
     "theme": {
       "dark": "Dark",
@@ -15,8 +15,13 @@
       "vehicles": "Vehicles",
       "settings": "Settings"
     },
+    "brand": {
+      "name": "Traccar",
+      "subtitle": "Control Room"
+    },
     "operator": {
-      "active": "Active operator"
+      "active": "Active operator",
+      "name": "Demo Admin"
     },
     "hero": {
       "kicker": "Real-time GPS monitoring",
@@ -27,10 +32,12 @@
       "terciaryAction": "Go to monitoring"
     },
     "preview": {
-      "gateway": "Traccar demo gateway",
+      "gateway": "Traccar demo",
       "connected": "Connected",
+      "disconnected": "Disconnected",
       "apiMode": "API mode",
       "pollingReady": "Polling ready",
+      "leaflet": "Leaflet",
       "mapEngine": "Map engine",
       "accessibility": "Accessibility",
       "wcag": "WCAG AA target"
@@ -40,6 +47,11 @@
       "english": "English",
       "spanish": "Spanish"
     }
+  },
+  "status": {
+    "online": "Online",
+    "offline": "Offline",
+    "unknown": "No signal"
   },
   "monitor": {
     "loading": "Loading vehicle monitor",
@@ -56,6 +68,19 @@
       "title": "We could not reach the Traccar demo server.",
       "description": "The public server may be down, blocked by CORS, or rejecting demo credentials.",
       "retry": "Retry connection"
+    },
+    "connectionStatus": {
+      "online": "Live signal",
+      "offline": "No active signal"
+    },
+    "labels": {
+      "gpsTelemetry": "GPS Telemetry",
+      "waitingData": "Waiting for data",
+      "positionQuality": "Position quality",
+      "polling": "Polling every 5 seconds",
+      "gpsLocked": "GPS locked",
+      "waitingGps": "Waiting for GPS",
+      "liveMap": "Live map"
     },
     "emptyPosition": {
       "title": "Waiting for GPS signal",

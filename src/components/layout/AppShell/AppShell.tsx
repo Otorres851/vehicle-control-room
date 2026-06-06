@@ -19,6 +19,7 @@ import { useTranslation } from "react-i18next";
 
 import heroVehicle from "../../../assets/images/hero-vehicle.png";
 import { VehicleMonitorPanel } from "../../../features/vehicle-monitor/components/VehicleMonitorPanel";
+import { useTraccarSession } from "../../../features/vehicle-monitor/hooks/useTraccarSession";
 import { useTheme } from "../../../hooks/useTheme";
 
 import styles from "./AppShell.module.scss";
@@ -26,6 +27,8 @@ import styles from "./AppShell.module.scss";
 export function AppShell() {
   const { theme, toggleTheme } = useTheme();
   const { i18n, t } = useTranslation();
+  const sessionQuery = useTraccarSession();
+  const isGatewayConnected = sessionQuery.isSuccess;
 
   const isDark = theme === "dark";
   const currentLanguage = i18n.language.startsWith("es") ? "es" : "en";
@@ -66,8 +69,8 @@ export function AppShell() {
           </div>
 
           <div>
-            <strong>Traccar</strong>
-            <span>Control Room</span>
+            <strong>{t("app.brand.name")}</strong>
+            <span>{t("app.brand.subtitle")}</span>
           </div>
         </div>
 
@@ -101,7 +104,7 @@ export function AppShell() {
         <div className={styles.operatorCard}>
           <div className={styles.avatar}>AD</div>
           <div>
-            <strong>Admin Demo</strong>
+            <strong>{t("app.operator.name")}</strong>
             <span>{t("app.operator.active")}</span>
           </div>
         </div>
@@ -125,7 +128,11 @@ export function AppShell() {
                 aria-label={t("app.language.label")}
               >
                 <Languages size={16} aria-hidden="true" />
-                <span>{currentLanguage.toUpperCase()}</span>
+                <span>
+                  {currentLanguage === "es"
+                    ? t("app.language.spanish")
+                    : t("app.language.english")}
+                </span>
                 <ChevronDown
                   size={16}
                   className={styles.chevron}
@@ -146,7 +153,7 @@ export function AppShell() {
                       setIsLanguageOpen(false);
                     }}
                   >
-                    EN
+                    {t("app.language.english")}
                   </button>
 
                   <button
@@ -159,7 +166,7 @@ export function AppShell() {
                       setIsLanguageOpen(false);
                     }}
                   >
-                    ES
+                    {t("app.language.spanish")}
                   </button>
                 </div>
               ) : null}
@@ -219,7 +226,14 @@ export function AppShell() {
                 <h2>{t("app.preview.gateway")}</h2>
               </div>
 
-              <span>{t("app.preview.connected")}</span>
+              <span
+                className={styles.gatewayStatus}
+                data-status={isGatewayConnected ? "online" : "offline"}
+              >
+                {isGatewayConnected
+                  ? t("app.preview.connected")
+                  : t("app.preview.disconnected")}
+              </span>
             </header>
 
             <div className={styles.systemMetrics}>
@@ -231,7 +245,11 @@ export function AppShell() {
                   <strong>{t("app.preview.pollingReady")}</strong>
                 </div>
 
-                <CheckCircle size={22} className={styles.metricSuccess} />
+                <CheckCircle
+                  size={18}
+                  className={styles.metricSuccess}
+                  data-status={isGatewayConnected ? "online" : "offline"}
+                />
               </div>
 
               <div className={styles.metricCard}>
@@ -239,10 +257,14 @@ export function AppShell() {
 
                 <div className={styles.metricBody}>
                   <span>{t("app.preview.mapEngine")}</span>
-                  <strong>Leaflet</strong>
+                  <strong>{t("app.preview.leaflet")}</strong>
                 </div>
 
-                <CheckCircle size={18} className={styles.metricSuccess} />
+                <CheckCircle
+                  size={18}
+                  className={styles.metricSuccess}
+                  data-status={isGatewayConnected ? "online" : "offline"}
+                />
               </div>
 
               <div className={styles.metricCard}>
@@ -253,7 +275,11 @@ export function AppShell() {
                   <strong>{t("app.preview.wcag")}</strong>
                 </div>
 
-                <CheckCircle size={18} className={styles.metricSuccess} />
+                <CheckCircle
+                  size={18}
+                  className={styles.metricSuccess}
+                  data-status={isGatewayConnected ? "online" : "offline"}
+                />
               </div>
             </div>
           </article>

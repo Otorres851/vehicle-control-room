@@ -44,6 +44,8 @@ export function VehicleMonitorPanel() {
   }, [devices, selectedDeviceId]);
 
   const activeDeviceId = selectedDevice?.id ?? null;
+  console.log("Selected device:", selectedDevice);
+  console.log("Device status:", selectedDevice?.status);
 
   // Positions are polled periodically once there is an active device to monitor.
   const positionsQuery = usePositions(Boolean(activeDeviceId));
@@ -190,7 +192,9 @@ export function VehicleMonitorPanel() {
                 <strong>
                   {selectedDevice?.name ?? t("monitor.noVehicle")}
                 </strong>
-                <small>{formatConnectionStatus(selectedDevice?.status)}</small>
+                <small>
+                  {formatConnectionStatus(selectedDevice?.status, t)}
+                </small>
               </span>
 
               <ChevronDown
@@ -221,7 +225,7 @@ export function VehicleMonitorPanel() {
 
                     <span>
                       <strong>{device.name}</strong>
-                      <small>{formatConnectionStatus(device.status)}</small>
+                      <small>{formatConnectionStatus(device.status, t)}</small>
                     </span>
                   </button>
                 ))}
@@ -237,8 +241,12 @@ export function VehicleMonitorPanel() {
             <Radio size={20} />
           </div>
           <span>{t("monitor.connection")}</span>
-          <strong>{formatConnectionStatus(selectedDevice?.status)}</strong>
-          <small>{isOnline ? "Live signal" : "No active signal"}</small>
+          <strong>{formatConnectionStatus(selectedDevice?.status, t)}</strong>
+          <small>
+            {isOnline
+              ? t("monitor.connectionStatus.online")
+              : t("monitor.connectionStatus.offline")}
+          </small>
         </article>
 
         <article className={styles.kpiCard}>
@@ -247,7 +255,11 @@ export function VehicleMonitorPanel() {
           </div>
           <span>{t("monitor.speed")}</span>
           <strong>{formatSpeedFromKnots(selectedPosition?.speed)}</strong>
-          <small>{selectedPosition ? "GPS telemetry" : "Waiting data"}</small>
+          <small>
+            {selectedPosition
+              ? t("monitor.labels.gpsTelemetry")
+              : t("monitor.labels.waitingData")}
+          </small>
         </article>
 
         <article className={styles.kpiCard}>
@@ -257,10 +269,10 @@ export function VehicleMonitorPanel() {
           <span>{t("monitor.statusCard.accuracy")}</span>
           <strong>
             {typeof gpsAccuracy === "number"
-              ? `${Math.round(gpsAccuracy)} m`
+              ? `±${Math.round(gpsAccuracy)} m`
               : "—"}
           </strong>
-          <small>Position quality</small>
+          <small>{t("monitor.labels.positionQuality")}</small>
         </article>
 
         <article className={styles.kpiCard}>
@@ -273,7 +285,7 @@ export function VehicleMonitorPanel() {
               selectedPosition?.fixTime ?? selectedDevice?.lastUpdate,
             )}
           </strong>
-          <small>Polling cada 5 segundos</small>
+          <small>{t("monitor.labels.polling")}</small>
         </article>
       </div>
 
@@ -288,7 +300,7 @@ export function VehicleMonitorPanel() {
         <div className={styles.mapArea}>
           <div className={styles.mapToolbar}>
             <div>
-              <strong>{t("map.title", "Mapa en vivo")}</strong>
+              <strong>{t("monitor.labels.liveMap")}</strong>
               <span>{selectedDevice?.name}</span>
             </div>
 
@@ -297,7 +309,9 @@ export function VehicleMonitorPanel() {
               data-active={Boolean(selectedPosition)}
             >
               <span />
-              {selectedPosition ? "GPS locked" : "Waiting GPS"}
+              {selectedPosition
+                ? t("monitor.labels.gpsLocked")
+                : t("monitor.labels.waitingGps")}
             </span>
           </div>
 
