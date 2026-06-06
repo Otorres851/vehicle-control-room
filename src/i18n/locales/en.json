@@ -60,14 +60,8 @@
     "waitingSignal": "Waiting signal",
     "coordinates": "Coordinates",
     "markerAlt": "Selected vehicle current location",
-    "searchPlaceholder": "Search address or place...",
-    "allGroups": "All groups",
-    "allStatuses": "All statuses",
-    "fullscreen": "Fullscreen",
-    "moving": "Moving",
-    "stopped": "Stopped",
-    "offline": "Offline",
-    "alert": "Alert"
+    "expand": "Open large map",
+    "close": "Close map"
   },
   "monitor": {
     "loading": "Loading vehicle monitor",

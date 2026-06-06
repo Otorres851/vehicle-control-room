@@ -112,177 +112,227 @@ export function AppShell() {
 
       <section className={styles.content}>
         <header className={styles.header}>
-          <div>
-            <p className={styles.eyebrow}>{t("app.eyebrow")}</p>
-            <h1>{t("app.title")}</h1>
-          </div>
+          {sessionQuery.isLoading ? (
+            <>
+              <div>
+                <div className={styles.skeletonEyebrow} />
+                <div className={styles.skeletonHeaderTitle} />
+              </div>
 
-          <div className={styles.actions}>
-            <div ref={languageDropdownRef} className={styles.languageDropdown}>
-              <button
-                type="button"
-                className={styles.languageTrigger}
-                onClick={() => setIsLanguageOpen((current) => !current)}
-                aria-expanded={isLanguageOpen}
-                aria-haspopup="listbox"
-                aria-label={t("app.language.label")}
-              >
-                <Languages size={16} aria-hidden="true" />
-                <span>
-                  {currentLanguage === "es"
-                    ? t("app.language.spanish")
-                    : t("app.language.english")}
-                </span>
-                <ChevronDown
-                  size={16}
-                  className={styles.chevron}
-                  data-open={isLanguageOpen}
-                  aria-hidden="true"
-                />
-              </button>
+              <div className={styles.skeletonHeaderActions}>
+                <div />
+                <div />
+              </div>
+            </>
+          ) : (
+            <>
+              <div>
+                <p className={styles.eyebrow}>{t("app.eyebrow")}</p>
+                <h1>{t("app.title")}</h1>
+              </div>
 
-              {isLanguageOpen ? (
-                <div className={styles.languageMenu} role="listbox">
+              <div className={styles.actions}>
+                <div
+                  ref={languageDropdownRef}
+                  className={styles.languageDropdown}
+                >
                   <button
                     type="button"
-                    role="option"
-                    aria-selected={currentLanguage === "en"}
-                    onClick={() => {
-                      void i18n.changeLanguage("en");
-                      localStorage.setItem("language", "en");
-                      setIsLanguageOpen(false);
-                    }}
+                    className={styles.languageTrigger}
+                    onClick={() => setIsLanguageOpen((current) => !current)}
+                    aria-expanded={isLanguageOpen}
+                    aria-haspopup="listbox"
+                    aria-label={t("app.language.label")}
                   >
-                    {t("app.language.english")}
+                    <Languages size={16} aria-hidden="true" />
+                    <span>
+                      {currentLanguage === "es"
+                        ? t("app.language.spanish")
+                        : t("app.language.english")}
+                    </span>
+                    <ChevronDown
+                      size={16}
+                      className={styles.chevron}
+                      data-open={isLanguageOpen}
+                      aria-hidden="true"
+                    />
                   </button>
 
-                  <button
-                    type="button"
-                    role="option"
-                    aria-selected={currentLanguage === "es"}
-                    onClick={() => {
-                      void i18n.changeLanguage("es");
-                      localStorage.setItem("language", "es");
-                      setIsLanguageOpen(false);
-                    }}
-                  >
-                    {t("app.language.spanish")}
-                  </button>
+                  {isLanguageOpen ? (
+                    <div className={styles.languageMenu} role="listbox">
+                      <button
+                        type="button"
+                        role="option"
+                        aria-selected={currentLanguage === "en"}
+                        onClick={() => {
+                          void i18n.changeLanguage("en");
+                          localStorage.setItem("language", "en");
+                          setIsLanguageOpen(false);
+                        }}
+                      >
+                        {t("app.language.english")}
+                      </button>
+
+                      <button
+                        type="button"
+                        role="option"
+                        aria-selected={currentLanguage === "es"}
+                        onClick={() => {
+                          void i18n.changeLanguage("es");
+                          localStorage.setItem("language", "es");
+                          setIsLanguageOpen(false);
+                        }}
+                      >
+                        {t("app.language.spanish")}
+                      </button>
+                    </div>
+                  ) : null}
                 </div>
-              ) : null}
-            </div>
 
-            <button
-              type="button"
-              className={styles.themeToggle}
-              onClick={toggleTheme}
-              aria-label={
-                isDark
-                  ? t("app.theme.switchToLight")
-                  : t("app.theme.switchToDark")
-              }
-            >
-              <span className={styles.themeIcon} aria-hidden="true">
-                {isDark ? <Moon size={16} /> : <SunMedium size={16} />}
-              </span>
+                <button
+                  type="button"
+                  className={styles.themeToggle}
+                  onClick={toggleTheme}
+                  aria-label={
+                    isDark
+                      ? t("app.theme.switchToLight")
+                      : t("app.theme.switchToDark")
+                  }
+                >
+                  <span className={styles.themeIcon} aria-hidden="true">
+                    {isDark ? <Moon size={16} /> : <SunMedium size={16} />}
+                  </span>
 
-              <span>{isDark ? t("app.theme.dark") : t("app.theme.light")}</span>
-            </button>
-          </div>
+                  <span>
+                    {isDark ? t("app.theme.dark") : t("app.theme.light")}
+                  </span>
+                </button>
+              </div>
+            </>
+          )}
         </header>
 
         <section id="overview" className={styles.overview}>
-          <article className={styles.heroCard}>
-            <span className={styles.liveBadge}>
-              <span className={styles.liveDot} />
-              {t("app.hero.badge", "En tiempo real")}
-            </span>
+          {sessionQuery.isLoading ? (
+            <>
+              <article className={styles.heroSkeleton}>
+                <div className={styles.skeletonBadge} />
+                <div className={styles.skeletonHeroTitle} />
+                <div className={styles.skeletonHeroText} />
+                <div className={styles.skeletonHeroActions}>
+                  <div />
+                  <div />
+                </div>
+              </article>
 
-            <h2>{t("app.hero.title")}</h2>
-            <p>{t("app.hero.description")}</p>
-
-            <div className={styles.vehicleVisual} aria-hidden="true">
-              <img src={heroVehicle} alt="" />
-              <span className={styles.radarRing} />
-            </div>
-
-            <div className={styles.heroActions}>
-              <a href="#monitor" className={styles.terciaryAction}>
-                {t("app.hero.terciaryAction")}
-                <ArrowRight size={16} aria-hidden="true" />
-              </a>
-
-              <a href="#map" className={styles.secondaryAction}>
-                {t("app.hero.secondaryAction")}
-                <MapPinned size={16} aria-hidden="true" />
-              </a>
-            </div>
-          </article>
-
-          <article className={styles.systemCard}>
-            <header>
-              <div>
-                <ShieldCheck size={22} />
-                <h2>{t("app.preview.gateway")}</h2>
-              </div>
-
-              <span
-                className={styles.gatewayStatus}
-                data-status={isGatewayConnected ? "online" : "offline"}
-              >
-                {isGatewayConnected
-                  ? t("app.preview.connected")
-                  : t("app.preview.disconnected")}
-              </span>
-            </header>
-
-            <div className={styles.systemMetrics}>
-              <div className={styles.metricCard}>
-                <Activity size={20} className={styles.metricApi} />
-
-                <div className={styles.metricBody}>
-                  <span>{t("app.preview.apiMode")}</span>
-                  <strong>{t("app.preview.pollingReady")}</strong>
+              <article className={styles.systemSkeleton}>
+                <div className={styles.skeletonSystemHeader}>
+                  <div className={styles.skeletonSystemTitle} />
+                  <div className={styles.skeletonSystemStatus} />
                 </div>
 
-                <CheckCircle
-                  size={18}
-                  className={styles.metricSuccess}
-                  data-status={isGatewayConnected ? "online" : "offline"}
-                />
-              </div>
+                <div className={styles.skeletonSystemMetrics}>
+                  <div />
+                  <div />
+                  <div />
+                </div>
+              </article>
+            </>
+          ) : (
+            <>
+              <article className={styles.heroCard}>
+                <span className={styles.liveBadge}>
+                  <span className={styles.liveDot} />
+                  {t("app.hero.badge", "En tiempo real")}
+                </span>
 
-              <div className={styles.metricCard}>
-                <MapPinned size={20} className={styles.metricMap} />
+                <h2>{t("app.hero.title")}</h2>
+                <p>{t("app.hero.description")}</p>
 
-                <div className={styles.metricBody}>
-                  <span>{t("app.preview.mapEngine")}</span>
-                  <strong>{t("app.preview.leaflet")}</strong>
+                <div className={styles.vehicleVisual} aria-hidden="true">
+                  <img src={heroVehicle} alt="" />
+                  <span className={styles.radarRing} />
                 </div>
 
-                <CheckCircle
-                  size={18}
-                  className={styles.metricSuccess}
-                  data-status={isGatewayConnected ? "online" : "offline"}
-                />
-              </div>
+                <div className={styles.heroActions}>
+                  <a href="#monitor" className={styles.terciaryAction}>
+                    {t("app.hero.terciaryAction")}
+                    <ArrowRight size={16} aria-hidden="true" />
+                  </a>
 
-              <div className={styles.metricCard}>
-                <Bell size={20} className={styles.metricAccessibility} />
-
-                <div className={styles.metricBody}>
-                  <span>{t("app.preview.accessibility")}</span>
-                  <strong>{t("app.preview.wcag")}</strong>
+                  <a href="#map" className={styles.secondaryAction}>
+                    {t("app.hero.secondaryAction")}
+                    <MapPinned size={16} aria-hidden="true" />
+                  </a>
                 </div>
+              </article>
 
-                <CheckCircle
-                  size={18}
-                  className={styles.metricSuccess}
-                  data-status={isGatewayConnected ? "online" : "offline"}
-                />
-              </div>
-            </div>
-          </article>
+              <article className={styles.systemCard}>
+                <header>
+                  <div>
+                    <ShieldCheck size={22} />
+                    <h2>{t("app.preview.gateway")}</h2>
+                  </div>
+
+                  <span
+                    className={styles.gatewayStatus}
+                    data-status={isGatewayConnected ? "online" : "offline"}
+                  >
+                    {isGatewayConnected
+                      ? t("app.preview.connected")
+                      : t("app.preview.disconnected")}
+                  </span>
+                </header>
+
+                <div className={styles.systemMetrics}>
+                  <div className={styles.metricCard}>
+                    <Activity size={20} className={styles.metricApi} />
+
+                    <div className={styles.metricBody}>
+                      <span>{t("app.preview.apiMode")}</span>
+                      <strong>{t("app.preview.pollingReady")}</strong>
+                    </div>
+
+                    <CheckCircle
+                      size={18}
+                      className={styles.metricSuccess}
+                      data-status={isGatewayConnected ? "online" : "offline"}
+                    />
+                  </div>
+
+                  <div className={styles.metricCard}>
+                    <MapPinned size={20} className={styles.metricMap} />
+
+                    <div className={styles.metricBody}>
+                      <span>{t("app.preview.mapEngine")}</span>
+                      <strong>{t("app.preview.leaflet")}</strong>
+                    </div>
+
+                    <CheckCircle
+                      size={18}
+                      className={styles.metricSuccess}
+                      data-status={isGatewayConnected ? "online" : "offline"}
+                    />
+                  </div>
+
+                  <div className={styles.metricCard}>
+                    <Bell size={20} className={styles.metricAccessibility} />
+
+                    <div className={styles.metricBody}>
+                      <span>{t("app.preview.accessibility")}</span>
+                      <strong>{t("app.preview.wcag")}</strong>
+                    </div>
+
+                    <CheckCircle
+                      size={18}
+                      className={styles.metricSuccess}
+                      data-status={isGatewayConnected ? "online" : "offline"}
+                    />
+                  </div>
+                </div>
+              </article>
+            </>
+          )}
         </section>
 
         <section id="monitor">

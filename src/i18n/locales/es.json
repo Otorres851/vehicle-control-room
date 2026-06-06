@@ -60,14 +60,8 @@
     "waitingSignal": "Esperando señal",
     "coordinates": "Coordenadas",
     "markerAlt": "Ubicación actual del vehículo seleccionado",
-    "searchPlaceholder": "Buscar dirección o lugar...",
-    "allGroups": "Todos los grupos",
-    "allStatuses": "Todos los estados",
-    "fullscreen": "Pantalla completa",
-    "moving": "En movimiento",
-    "stopped": "Detenidos",
-    "offline": "Sin conexión",
-    "alert": "En alerta"
+    "expand": "Abrir mapa en grande",
+    "close": "Cerrar mapa"
   },
   "monitor": {
     "loading": "Cargando monitor vehicular",

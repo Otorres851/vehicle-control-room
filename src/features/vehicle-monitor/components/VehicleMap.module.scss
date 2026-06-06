@@ -83,26 +83,6 @@
   box-shadow: var(--shadow-focus);
 }
 
-.marker {
-  color: var(--color-primary);
-}
-
-.markerShell {
-  display: grid;
-  width: 2.875rem;
-  height: 2.875rem;
-  place-items: center;
-  color: var(--color-primary);
-  background:
-    radial-gradient(circle, rgba(255, 255, 255, 0.9), transparent 58%),
-    var(--color-primary-soft);
-  border: 1px solid var(--color-primary);
-  border-radius: var(--radius-full);
-  box-shadow:
-    0 0 0 0.55rem var(--color-primary-soft),
-    0 1rem 2rem rgba(0, 0, 0, 0.28);
-}
-
 .coordinatesCard,
 .emptyState {
   position: absolute;
@@ -161,6 +141,87 @@
   }
 }
 
+.mapActions {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.expandButton,
+.closeButton {
+  display: grid;
+  place-items: center;
+  color: var(--color-primary);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.expandButton {
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: var(--radius-full);
+}
+
+.expandButton:hover,
+.closeButton:hover {
+  transform: scale(1.04);
+  border-color: color-mix(
+    in srgb,
+    var(--color-primary) 35%,
+    var(--color-border)
+  );
+}
+
+.mapOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: grid;
+  padding: var(--space-5);
+  background: rgba(0, 0, 0, 0.72);
+  backdrop-filter: blur(10px);
+}
+
+.mapModal {
+  position: relative;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  width: min(1200px, 100%);
+  height: min(820px, 100%);
+  margin: auto;
+  padding: var(--space-5);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-card);
+}
+
+.modalHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  margin-bottom: var(--space-4);
+}
+
+.closeButton {
+  width: 2.75rem;
+  height: 2.75rem;
+}
+
+.fullMap {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+}
+
 @media (max-width: 640px) {
   .mapCard {
     padding: var(--space-4);
@@ -185,5 +246,23 @@
     right: var(--space-3);
     bottom: var(--space-3);
     left: var(--space-3);
+  }
+
+  .mapActions {
+    width: 100%;
+  }
+
+  .expandButton {
+    flex-shrink: 0;
+  }
+
+  .mapModal {
+    width: 100%;
+    height: 100%;
+    padding: var(--space-4);
+  }
+
+  .modalHeader {
+    align-items: flex-start;
   }
 }

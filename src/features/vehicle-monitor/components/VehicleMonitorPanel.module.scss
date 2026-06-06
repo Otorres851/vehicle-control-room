@@ -448,30 +448,114 @@
 }
 
 /* Skeleton */
-.skeletonTop {
+.skeletonHeader {
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  gap: var(--space-5);
+  padding: var(--space-5);
+  background:
+    radial-gradient(
+      circle at 90% 10%,
+      rgba(29, 155, 240, 0.12),
+      transparent 16rem
+    ),
+    var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-card);
+}
+
+.skeletonHeaderText {
+  flex: 1;
+}
+
+.skeletonEyebrow {
+  width: 8rem;
+  height: 0.8rem;
+}
+
+.skeletonTitle {
+  width: min(22rem, 100%);
+  height: 3rem;
+  margin-top: var(--space-3);
+}
+
+.skeletonSubtitle {
+  width: 14rem;
+  height: 1rem;
+  margin-top: var(--space-3);
+}
+
+.skeletonVehicleSelector {
+  width: 20rem;
+  height: 4rem;
+  border-radius: var(--radius-lg);
+}
+
+.skeletonMetrics {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-4);
+  margin-top: var(--space-5);
+}
+
+.skeletonCard {
+  height: 10rem;
+  border-radius: var(--radius-xl);
+}
+
+.skeletonMonitorGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(23rem, 0.75fr);
+  gap: var(--space-5);
+  margin-top: var(--space-5);
+}
+
+.skeletonMapArea {
+  height: 38rem;
+  border-radius: var(--radius-xl);
+}
+
+.skeletonSidePanel {
+  display: flex;
+  flex-direction: column;
   gap: var(--space-4);
 }
 
+.skeletonVehicleSummary {
+  height: 6rem;
+  border-radius: var(--radius-lg);
+}
+
+.skeletonStatusCard {
+  height: 28rem;
+  border-radius: var(--radius-xl);
+}
+
+.skeletonEyebrow,
 .skeletonTitle,
-.skeletonBadge,
-.skeletonMetrics div,
-.skeletonMap {
+.skeletonSubtitle,
+.skeletonVehicleSelector,
+.skeletonCard,
+.skeletonMapArea,
+.skeletonVehicleSummary,
+.skeletonStatusCard {
   position: relative;
   overflow: hidden;
   background:
     linear-gradient(145deg, rgba(255, 255, 255, 0.04), transparent),
     var(--color-surface-elevated);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
 }
 
+.skeletonEyebrow::after,
 .skeletonTitle::after,
-.skeletonBadge::after,
-.skeletonMetrics div::after,
-.skeletonMap::after {
+.skeletonSubtitle::after,
+.skeletonVehicleSelector::after,
+.skeletonCard::after,
+.skeletonMapArea::after,
+.skeletonVehicleSummary::after,
+.skeletonStatusCard::after {
   position: absolute;
   inset: 0;
   content: "";
@@ -483,38 +567,6 @@
   );
   transform: translateX(-100%);
   animation: shimmer 1.6s infinite;
-}
-
-.skeletonTitle {
-  width: min(24rem, 100%);
-  height: 5rem;
-}
-
-.skeletonBadge {
-  width: 7rem;
-  height: 2.6rem;
-  border-radius: var(--radius-full);
-}
-
-.skeletonMetrics {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: var(--space-4);
-  margin-top: var(--space-6);
-}
-
-.skeletonMetrics div {
-  height: 7rem;
-}
-
-.skeletonWide {
-  grid-column: span 2;
-}
-
-.skeletonMap {
-  width: 100%;
-  height: 28rem;
-  margin-top: var(--space-6);
 }
 
 @keyframes shimmer {
@@ -534,6 +586,14 @@
 }
 
 @media (max-width: 1180px) {
+  .skeletonMonitorGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .skeletonSidePanel {
+    order: -1;
+  }
+
   .monitorGrid {
     grid-template-columns: 1fr;
   }
@@ -556,6 +616,14 @@
 
   .skeletonWide {
     grid-column: span 1;
+  }
+
+  .skeletonHeader {
+    flex-direction: column;
+  }
+
+  .skeletonVehicleSelector {
+    width: 100%;
   }
 }
 
@@ -588,5 +656,13 @@
 
   .skeletonMap {
     height: 18rem;
+  }
+
+  .skeletonMapArea {
+    height: 22rem;
+  }
+
+  .skeletonMetrics {
+    grid-template-columns: 1fr;
   }
 }

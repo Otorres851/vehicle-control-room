@@ -100,7 +100,6 @@
 }
 
 .metricWide {
-  grid-column: span 2;
   min-height: 6.25rem;
 }
 
@@ -131,7 +130,7 @@
   overflow: hidden;
   color: var(--color-text);
   font-family: var(--font-mono);
-  font-size: clamp(1.15rem, 2vw, 1.45rem);
+  font-size: clamp(0.85rem, 1.4vw, 1.1rem);
   font-weight: 800;
   line-height: 1.1;
   text-overflow: ellipsis;
