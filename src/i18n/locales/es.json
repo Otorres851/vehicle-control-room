@@ -53,6 +53,22 @@
     "offline": "Fuera de línea",
     "unknown": "Sin señal"
   },
+  "map": {
+    "liveLocation": "Ubicación en vivo",
+    "interactiveMap": "Mapa GPS interactivo",
+    "gpsLocked": "GPS conectado",
+    "waitingSignal": "Esperando señal",
+    "coordinates": "Coordenadas",
+    "markerAlt": "Ubicación actual del vehículo seleccionado",
+    "searchPlaceholder": "Buscar dirección o lugar...",
+    "allGroups": "Todos los grupos",
+    "allStatuses": "Todos los estados",
+    "fullscreen": "Pantalla completa",
+    "moving": "En movimiento",
+    "stopped": "Detenidos",
+    "offline": "Sin conexión",
+    "alert": "En alerta"
+  },
   "monitor": {
     "loading": "Cargando monitor vehicular",
     "eyebrow": "Monitor en vivo",

@@ -44,8 +44,6 @@ export function VehicleMonitorPanel() {
   }, [devices, selectedDeviceId]);
 
   const activeDeviceId = selectedDevice?.id ?? null;
-  console.log("Selected device:", selectedDevice);
-  console.log("Device status:", selectedDevice?.status);
 
   // Positions are polled periodically once there is an active device to monitor.
   const positionsQuery = usePositions(Boolean(activeDeviceId));
@@ -298,23 +296,6 @@ export function VehicleMonitorPanel() {
 
       <div className={styles.monitorGrid}>
         <div className={styles.mapArea}>
-          <div className={styles.mapToolbar}>
-            <div>
-              <strong>{t("monitor.labels.liveMap")}</strong>
-              <span>{selectedDevice?.name}</span>
-            </div>
-
-            <span
-              className={styles.livePill}
-              data-active={Boolean(selectedPosition)}
-            >
-              <span />
-              {selectedPosition
-                ? t("monitor.labels.gpsLocked")
-                : t("monitor.labels.waitingGps")}
-            </span>
-          </div>
-
           <VehicleMap
             position={selectedPosition}
             emptyTitle={t("monitor.emptyPosition.title")}

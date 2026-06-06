@@ -2,6 +2,7 @@ import L from "leaflet";
 import { useEffect, useMemo } from "react";
 import { MapContainer, Marker, TileLayer, useMap } from "react-leaflet";
 
+import { useTranslation } from "react-i18next";
 import type { TraccarPosition } from "../../../api/traccar.api";
 import { useSmoothedPosition } from "../hooks/useSmoothedPosition";
 
@@ -40,6 +41,7 @@ export function VehicleMap({
   emptyDescription,
 }: VehicleMapProps) {
   const smoothedPosition = useSmoothedPosition(position);
+  const { t } = useTranslation();
 
   const center: [number, number] = smoothedPosition
     ? [smoothedPosition.latitude, smoothedPosition.longitude]
@@ -64,15 +66,15 @@ export function VehicleMap({
     <section className={styles.mapCard} aria-labelledby="vehicle-map-title">
       <div className={styles.mapHeader}>
         <div>
-          <p className={styles.eyebrow}>Live location</p>
+          <p className={styles.eyebrow}>{t("map.liveLocation")}</p>
           <h3 id="vehicle-map-title" className={styles.title}>
-            Interactive GPS map
+            {t("map.interactiveMap")}
           </h3>
         </div>
 
         <span className={styles.signalBadge} data-active={Boolean(position)}>
           <span />
-          {position ? "GPS locked" : "Waiting signal"}
+          {position ? t("map.gpsLocked") : t("map.waitingSignal")}
         </span>
       </div>
 
@@ -95,14 +97,14 @@ export function VehicleMap({
             <Marker
               position={[smoothedPosition.latitude, smoothedPosition.longitude]}
               icon={vehicleIcon}
-              alt="Selected vehicle current location"
+              alt={t("map.markerAlt")}
             />
           ) : null}
         </MapContainer>
 
         {position ? (
           <div className={styles.coordinatesCard}>
-            <span>Coordinates</span>
+            <span>{t("map.coordinates")}</span>
             <strong>
               {position.latitude.toFixed(5)}, {position.longitude.toFixed(5)}
             </strong>
