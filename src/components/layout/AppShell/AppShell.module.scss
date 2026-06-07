@@ -745,7 +745,10 @@
 .skeletonHeroActions div::after,
 .skeletonSystemTitle::after,
 .skeletonSystemStatus::after,
-.skeletonSystemMetrics div::after {
+.skeletonSystemMetrics div::after,
+.skeletonEyebrow::after,
+.skeletonHeaderTitle::after,
+.skeletonHeaderActions div::after {
   position: absolute;
   inset: 0;
   content: "";
@@ -852,30 +855,14 @@
   border-radius: var(--radius-lg);
 }
 
-.skeletonEyebrow::after,
-.skeletonHeaderTitle::after,
-.skeletonHeaderActions div::after {
-  position: absolute;
-  inset: 0;
-  content: "";
-  background: linear-gradient(
-    90deg,
-    transparent,
-    color-mix(in srgb, var(--color-primary) 12%, transparent),
-    transparent
-  );
-  transform: translateX(-100%);
-  animation: shellShimmer 1.6s infinite;
-}
-
 .skeletonEyebrow {
   width: 10rem;
-  height: 1rem;
+  height: 1.5rem;
 }
 
 .skeletonHeaderTitle {
   width: 22rem;
-  height: 3rem;
+  height: 1.5rem;
   margin-top: var(--space-3);
 }
 
@@ -885,8 +872,8 @@
 }
 
 .skeletonHeaderActions div {
-  width: 10rem;
-  height: 3.5rem;
+  width: 8rem;
+  height: 2.5rem;
   border-radius: var(--radius-full);
 }
 
@@ -1066,7 +1053,7 @@
   .skeletonHeaderTitle {
     width: 100%;
     max-width: 18rem;
-    height: 2.5rem;
+    height: 1.6rem;
   }
 
   .skeletonHeaderActions {
