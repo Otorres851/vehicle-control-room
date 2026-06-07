@@ -109,7 +109,7 @@
   align-items: center;
   gap: var(--space-2);
   color: var(--color-text-muted);
-  font-size: 0.68rem;
+  font-size: 0.6rem;
   font-weight: 800;
   line-height: 1.25;
   letter-spacing: 0.08em;
@@ -179,10 +179,6 @@
 
   .header {
     flex-direction: column;
-  }
-
-  .grid {
-    grid-template-columns: 1fr;
   }
 
   .metricWide {

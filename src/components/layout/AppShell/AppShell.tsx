@@ -8,11 +8,13 @@ import {
   Languages,
   LayoutDashboard,
   MapPinned,
+  Menu,
   Moon,
   Radio,
   Settings,
   ShieldCheck,
   SunMedium,
+  X,
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -33,6 +35,7 @@ export function AppShell() {
   const isDark = theme === "dark";
   const currentLanguage = i18n.language.startsWith("es") ? "es" : "en";
   const [isLanguageOpen, setIsLanguageOpen] = useState(false);
+  const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
   const languageDropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -74,7 +77,21 @@ export function AppShell() {
           </div>
         </div>
 
-        <nav className={styles.nav} aria-label="Primary navigation">
+        <button
+          type="button"
+          className={styles.menuButton}
+          onClick={() => setIsMobileNavOpen((current) => !current)}
+          aria-label={isMobileNavOpen ? "Cerrar menú" : "Abrir menú"}
+          aria-expanded={isMobileNavOpen}
+        >
+          {isMobileNavOpen ? <X size={22} /> : <Menu size={22} />}
+        </button>
+
+        <nav
+          className={styles.nav}
+          data-open={isMobileNavOpen}
+          aria-label="Primary navigation"
+        >
           <a className={styles.navItemActive} href="#overview">
             <LayoutDashboard size={18} />
             {t("app.nav.overview")}

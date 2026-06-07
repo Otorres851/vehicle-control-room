@@ -117,8 +117,27 @@ export function VehicleMonitorPanel() {
           <div className={styles.skeletonMapArea} />
 
           <div className={styles.skeletonSidePanel}>
-            <div className={styles.skeletonVehicleSummary} />
-            <div className={styles.skeletonStatusCard} />
+            <div className={styles.skeletonVehiclePanel}>
+              <div className={styles.skeletonVehicleSummary} />
+
+              <div className={styles.skeletonStatusCard}>
+                <div className={styles.skeletonStatusHeader}>
+                  <div>
+                    <div className={styles.skeletonStatusEyebrow} />
+                    <div className={styles.skeletonStatusTitle} />
+                  </div>
+
+                  <div className={styles.skeletonStatusBadge} />
+                </div>
+
+                <div className={styles.skeletonStatusGrid}>
+                  <div />
+                  <div />
+                  <div />
+                  <div />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>

@@ -49,6 +49,10 @@
   box-shadow: var(--shadow-card);
 }
 
+.menuButton {
+  display: none;
+}
+
 .nav {
   display: grid;
   gap: var(--space-2);
@@ -908,14 +912,55 @@
   }
 
   .sidebar {
-    position: static;
+    position: sticky;
+    top: 0;
+    z-index: 3000;
+    display: grid;
+    grid-template-columns: 1fr auto;
     height: auto;
-    padding: var(--space-4);
+    padding: var(--space-3);
+    align-items: center;
+    justify-content: space-between;
   }
 
   .nav {
-    grid-template-columns: repeat(5, minmax(0, 1fr));
+    position: relative;
+    z-index: 3001;
+  }
+
+  .nav[data-open="true"] {
+    display: grid;
+    grid-column: 1 / -1;
+    grid-template-columns: 1fr;
+    width: 100%;
     margin-top: var(--space-4);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+  }
+
+  .menuButton {
+    display: grid;
+    width: 2.75rem;
+    height: 2.75rem;
+    place-items: center;
+    color: var(--color-primary);
+    background: var(--color-surface-elevated);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+  }
+
+  .nav {
+    grid-column: 1 / -1;
+    display: none;
+    margin-top: var(--space-4);
+  }
+
+  .nav[data-open="true"] {
+    display: grid;
+    grid-template-columns: 1fr;
   }
 
   .operatorCard {
@@ -1011,6 +1056,77 @@
   .skeletonHeaderActions div {
     flex: 1;
   }
+
+  .headerSkeleton {
+    align-items: stretch;
+    width: min(1320px, 100%);
+    margin: 0 auto var(--space-6);
+  }
+
+  .skeletonHeaderTitle {
+    width: 100%;
+    max-width: 18rem;
+    height: 2.5rem;
+  }
+
+  .skeletonHeaderActions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+  }
+
+  .skeletonHeaderActions div {
+    width: 100%;
+    height: 2.75rem;
+  }
+
+  .heroSkeleton,
+  .systemSkeleton {
+    min-height: auto;
+    padding: var(--space-4);
+  }
+
+  .skeletonBadge {
+    width: 13rem;
+    height: 2.8rem;
+  }
+
+  .skeletonHeroTitle {
+    width: 100%;
+    height: 32rem;
+  }
+
+  .skeletonHeroText {
+    width: 100%;
+    height: 16rem;
+  }
+
+  .skeletonHeroActions {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-3);
+  }
+
+  .skeletonHeroActions div:first-child,
+  .skeletonHeroActions div:last-child {
+    width: 100%;
+  }
+
+  .systemSkeleton {
+    gap: var(--space-5);
+  }
+
+  .skeletonSystemHeader {
+    gap: var(--space-3);
+  }
+
+  .skeletonSystemTitle {
+    width: 11rem;
+  }
+
+  .skeletonSystemStatus {
+    width: 6.5rem;
+  }
 }
 
 @media (max-width: 480px) {
@@ -1020,6 +1136,8 @@
 
   .sidebar {
     padding: var(--space-3);
+    justify-content: space-between;
+    align-items: center;
   }
 
   .nav {
@@ -1041,6 +1159,6 @@
   }
 
   .skeletonHeroTitle {
-    height: 9rem;
+    height: 12rem;
   }
 }
