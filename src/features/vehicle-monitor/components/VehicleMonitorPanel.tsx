@@ -103,7 +103,10 @@ export function VehicleMonitorPanel() {
             <div className={styles.skeletonSubtitle} />
           </div>
 
-          <div className={styles.skeletonVehicleSelector} />
+          <div className={styles.skeletonVehicleColumn}>
+            <div className={styles.skeletonVehicleLabel} />
+            <div className={styles.skeletonVehicleSelector} />
+          </div>
         </div>
 
         <div className={styles.skeletonMetrics}>

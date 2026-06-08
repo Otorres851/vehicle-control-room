@@ -449,10 +449,11 @@
 
 /* Skeleton */
 .skeletonHeader {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr minmax(18rem, 20rem);
   gap: var(--space-5);
   padding: var(--space-5);
+  align-items: start;
   background:
     radial-gradient(
       circle at 90% 10%,
@@ -463,6 +464,26 @@
   border: 1px solid var(--color-border);
   border-radius: var(--radius-xl);
   box-shadow: var(--shadow-card);
+}
+
+.skeletonHeaderText {
+  grid-column: 1;
+}
+
+.skeletonVehicleLabel {
+  width: 7rem;
+  height: 0.9rem;
+}
+
+.skeletonVehicleSelector {
+  width: 20rem;
+  height: 4rem;
+}
+
+.skeletonVehicleColumn {
+  display: grid;
+  gap: var(--space-2);
+  align-content: start;
 }
 
 .skeletonHeaderText {
@@ -486,6 +507,22 @@
   margin-top: var(--space-3);
 }
 
+.skeletonVehicleLabel {
+  width: 6rem;
+  height: 0.9rem;
+  margin-top: var(--space-4);
+
+  position: relative;
+  overflow: hidden;
+
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.04), transparent),
+    var(--color-surface-elevated);
+
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
 .skeletonVehicleSelector {
   width: 20rem;
   height: 4rem;
@@ -500,7 +537,7 @@
 }
 
 .skeletonCard {
-  height: 10rem;
+  height: 9.5rem;
   border-radius: var(--radius-xl);
 }
 
@@ -512,7 +549,7 @@
 }
 
 .skeletonMapArea {
-  padding: var(--space-5);
+  padding: 2rem;
   border-radius: var(--radius-xl);
 }
 
@@ -579,18 +616,19 @@
 }
 
 .skeletonVehicleSummary {
-  height: 6rem;
+  height: 4.3rem;
   border-radius: var(--radius-lg);
 }
 
 .skeletonStatusCard {
-  height: 28rem;
+  height: 25rem;
   border-radius: var(--radius-xl);
 }
 
 .skeletonEyebrow,
 .skeletonTitle,
 .skeletonSubtitle,
+.skeletonVehicleLabel,
 .skeletonVehicleSelector,
 .skeletonCard,
 .skeletonMapArea,
@@ -604,7 +642,6 @@
 .skeletonMapTitle,
 .skeletonMapBadge,
 .skeletonMapExpand,
-.skeletonMapCoordinates,
 .skeletonStatusGrid div {
   position: relative;
   overflow: hidden;
@@ -612,11 +649,13 @@
     linear-gradient(145deg, rgba(255, 255, 255, 0.04), transparent),
     var(--color-surface-elevated);
   border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
 }
 
 .skeletonEyebrow::after,
 .skeletonTitle::after,
 .skeletonSubtitle::after,
+.skeletonVehicleLabel::after,
 .skeletonVehicleSelector::after,
 .skeletonCard::after,
 .skeletonMapArea::after,
@@ -630,7 +669,6 @@
 .skeletonMapTitle::after,
 .skeletonMapBadge::after,
 .skeletonMapExpand::after,
-.skeletonMapCoordinates::after,
 .skeletonStatusGrid div::after {
   position: absolute;
   inset: 0;
@@ -772,7 +810,13 @@
   }
 
   .skeletonHeader {
-    flex-direction: column;
+    grid-template-columns: 1fr;
+  }
+
+  .skeletonHeaderText,
+  .skeletonVehicleLabel,
+  .skeletonVehicleSelector {
+    grid-column: 1;
   }
 
   .skeletonVehicleSelector {
@@ -807,6 +851,11 @@
     width: 100%;
   }
 
+  .skeletonStatusTitle {
+    height: 2rem;
+    margin-top: var(--space-2);
+  }
+
   .skeletonMap {
     height: 18rem;
   }
@@ -820,21 +869,25 @@
   }
 
   .skeletonHeader {
-    padding: var(--space-4);
+    padding: var(--space-3);
+    gap: var(--space-3);
   }
 
   .skeletonTitle {
-    width: 100%;
-    height: 2.75rem;
+    height: 2.25rem;
+    margin-top: var(--space-2);
   }
 
   .skeletonSubtitle {
-    width: 70%;
+    margin-top: var(--space-2);
+  }
+
+  .skeletonVehicleLabel {
+    margin-top: var(--space-2);
   }
 
   .skeletonVehicleSelector {
-    width: 100%;
-    height: 4rem;
+    height: 3.4rem;
   }
 
   .skeletonMetrics {
@@ -859,7 +912,7 @@
   }
 
   .skeletonVehicleSummary {
-    height: 6rem;
+    height: 4.5rem;
     border-radius: var(--radius-lg);
   }
 

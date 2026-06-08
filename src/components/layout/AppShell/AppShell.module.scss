@@ -724,8 +724,7 @@
 }
 
 .skeletonBadge,
-.skeletonHeroTitle,
-.skeletonHeroText,
+.skeletonHeroText div,
 .skeletonHeroActions div,
 .skeletonSystemTitle,
 .skeletonSystemStatus,
@@ -740,14 +739,15 @@
 }
 
 .skeletonBadge::after,
-.skeletonHeroTitle::after,
-.skeletonHeroText::after,
+.skeletonHeroTitle div::after,
+.skeletonHeroText div::after,
 .skeletonHeroActions div::after,
 .skeletonSystemTitle::after,
 .skeletonSystemStatus::after,
 .skeletonSystemMetrics div::after,
 .skeletonEyebrow::after,
 .skeletonHeaderTitle::after,
+.skeletonHeroImage::after,
 .skeletonHeaderActions div::after {
   position: absolute;
   inset: 0;
@@ -769,15 +769,66 @@
 }
 
 .skeletonHeroTitle {
-  width: min(22rem, 100%);
-  height: 11rem;
+  display: grid;
+  gap: 1rem;
   margin-top: var(--space-6);
 }
 
+.skeletonHeroTitle div {
+  position: relative;
+  overflow: hidden;
+
+  height: 2.8rem;
+
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.04), transparent),
+    var(--color-surface-elevated);
+
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+}
+
+.skeletonHeroTitle div:nth-child(1) {
+  width: 100%;
+}
+
+.skeletonHeroTitle div:nth-child(2) {
+  width: 85%;
+}
+
+.skeletonHeroTitle div:nth-child(3) {
+  width: 95%;
+}
+
 .skeletonHeroText {
-  width: min(24rem, 100%);
-  height: 5rem;
+  display: grid;
+  gap: var(--space-2);
   margin-top: var(--space-5);
+}
+
+.skeletonHeroText div {
+  height: 1rem;
+  border-radius: var(--radius-sm);
+}
+
+.skeletonHeroText div:nth-child(1) {
+  width: 100%;
+}
+
+.skeletonHeroText div:nth-child(2) {
+  width: 92%;
+}
+
+.skeletonHeroText div:nth-child(3) {
+  width: 96%;
+}
+
+.skeletonHeroText div:nth-child(4) {
+  width: 68%;
+}
+
+.skeletonHeroImage {
+  display: none;
 }
 
 .skeletonHeroActions {
@@ -807,6 +858,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  padding: var(--space-5);
 }
 
 .skeletonSystemHeader {
@@ -1078,14 +1130,8 @@
     height: 2.8rem;
   }
 
-  .skeletonHeroTitle {
-    width: 100%;
-    height: 32rem;
-  }
-
-  .skeletonHeroText {
-    width: 100%;
-    height: 16rem;
+  .skeletonHeroTitle div {
+    height: 2rem;
   }
 
   .skeletonHeroActions {
@@ -1113,6 +1159,23 @@
 
   .skeletonSystemStatus {
     width: 6.5rem;
+  }
+
+  .skeletonHeroText div {
+    height: 0.8rem;
+  }
+
+  .skeletonHeroImage {
+    display: block;
+    height: 18rem;
+    margin-top: var(--space-5);
+    position: relative;
+    overflow: hidden;
+    background:
+      linear-gradient(145deg, rgba(255, 255, 255, 0.04), transparent),
+      var(--color-surface-elevated);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
   }
 }
 
@@ -1145,7 +1208,7 @@
     padding: var(--space-4);
   }
 
-  .skeletonHeroTitle {
-    height: 12rem;
+  .skeletonHeroTitle div {
+    height: 1.4rem;
   }
 }

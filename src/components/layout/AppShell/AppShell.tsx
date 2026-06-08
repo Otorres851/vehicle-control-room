@@ -234,8 +234,18 @@ export function AppShell() {
             <>
               <article className={styles.heroSkeleton}>
                 <div className={styles.skeletonBadge} />
-                <div className={styles.skeletonHeroTitle} />
-                <div className={styles.skeletonHeroText} />
+                <div className={styles.skeletonHeroTitle}>
+                  <div />
+                  <div />
+                  <div />
+                </div>
+                <div className={styles.skeletonHeroText}>
+                  <div />
+                  <div />
+                  <div />
+                  <div />
+                </div>
+                <div className={styles.skeletonHeroImage} />
                 <div className={styles.skeletonHeroActions}>
                   <div />
                   <div />
