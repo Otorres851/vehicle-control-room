@@ -10,9 +10,9 @@ La aplicación se conecta a Traccar para autenticar usuarios, obtener dispositiv
 
 ## 🌐 Demo
 
-### Aplicación desplegada
+### Aplicación desplegada en vercel
 
-👉 [URL de Vercel o Netlify]
+👉 [https://vehicle-control-room.vercel.app/]
 
 ### Repositorio
 
