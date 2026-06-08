@@ -1,3 +1,5 @@
+<img width="1536" height="1024" alt="Image" src="https://github.com/user-attachments/assets/a670384f-c2eb-4d46-a5a4-4c30356a4a30" />
+
 # 🚗 Vehicle Control Room
 
 Monitor de vehículo en tiempo real desarrollado como prueba técnica para el rol de **Design Engineer (UX/UI)**.
