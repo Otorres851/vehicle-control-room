@@ -426,6 +426,17 @@
   letter-spacing: -0.075em;
 }
 
+.heroAccent {
+  display: inline-block;
+
+  background: linear-gradient(135deg, var(--color-primary), #2563eb, #7c3aed);
+
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
 .heroCard p {
   max-width: 20rem;
   margin-top: var(--space-5);

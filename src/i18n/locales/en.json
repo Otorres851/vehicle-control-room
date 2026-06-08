@@ -25,7 +25,8 @@
     },
     "hero": {
       "kicker": "Real-time GPS monitoring",
-      "title": "Intelligent vehicle monitoring.",
+      "titlePrefix": "Intelligent vehicle",
+      "titleAccent": "monitoring.",
       "description": "Track live position, connection status, speed and last update with a resilient, accessible and polished interface.",
       "primaryAction": "IN REAL TIME",
       "secondaryAction": "View map",

@@ -25,7 +25,8 @@
     },
     "hero": {
       "kicker": "Monitoreo GPS en tiempo real",
-      "title": "Monitoreo vehicular inteligente.",
+      "titlePrefix": "Monitoreo vehicular",
+      "titleAccent": "inteligente.",
       "description": "Supervisa ubicación en vivo, estado de conexión, velocidad y última actualización mediante una interfaz resiliente, accesible y pulida.",
       "primaryAction": "EN TIEMPO REAL",
       "secondaryAction": "Ver mapa",

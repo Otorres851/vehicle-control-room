@@ -273,7 +273,12 @@ export function AppShell() {
                   {t("app.hero.badge", "En tiempo real")}
                 </span>
 
-                <h2>{t("app.hero.title")}</h2>
+                <h2>
+                  {t("app.hero.titlePrefix")}{" "}
+                  <span className={styles.heroAccent}>
+                    {t("app.hero.titleAccent")}
+                  </span>
+                </h2>
                 <p>{t("app.hero.description")}</p>
 
                 <div className={styles.vehicleVisual} aria-hidden="true">
