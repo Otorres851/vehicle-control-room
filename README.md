@@ -1,4 +1,4 @@
-<img width="1536" height="1024" alt="Image" src="https://github.com/user-attachments/assets/a670384f-c2eb-4d46-a5a4-4c30356a4a30" />
+<img width="1774" height="887" alt="Image" src="https://github.com/user-attachments/assets/50208e7e-3569-47ab-922a-f65ec0be4a6f" />
 
 # 🚗 Vehicle Control Room
 
