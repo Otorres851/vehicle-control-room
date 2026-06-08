@@ -200,11 +200,7 @@ export function VehicleMonitorPanel() {
   }
 
   return (
-    <section
-      id="map"
-      className={styles.dashboard}
-      aria-labelledby="monitor-title"
-    >
+    <section className={styles.dashboard} aria-labelledby="monitor-title">
       <header className={styles.dashboardHeader}>
         <div>
           <p className={styles.eyebrow}>{t("monitor.eyebrow")}</p>
@@ -344,7 +340,7 @@ export function VehicleMonitorPanel() {
       ) : null}
 
       <div className={styles.monitorGrid}>
-        <div className={styles.mapArea}>
+        <div id="map" className={styles.mapArea}>
           <VehicleMap
             position={selectedPosition}
             emptyTitle={t("monitor.emptyPosition.title")}
@@ -353,6 +349,7 @@ export function VehicleMonitorPanel() {
         </div>
 
         <aside
+          id="vehicles"
           className={styles.sidePanel}
           aria-label="Selected vehicle details"
         >
