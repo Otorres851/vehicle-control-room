@@ -1,4 +1,9 @@
+/* Mixins */
+@use "../../../styles/abstracts/mixins" as *;
+
 .card {
+  @include card-shell;
+
   padding: var(--space-5);
   margin-top: 0;
   background:
@@ -9,9 +14,6 @@
     ),
     linear-gradient(145deg, rgba(255, 255, 255, 0.065), transparent),
     var(--color-surface-elevated);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-xl);
-  box-shadow: var(--shadow-card);
 }
 
 .header {
@@ -75,6 +77,8 @@
 
 .metric,
 .metricWide {
+  @include hover-lift;
+
   min-width: 0;
   min-height: 7.6rem;
   padding: var(--space-4);
@@ -83,20 +87,6 @@
     var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
-  transition:
-    transform 180ms ease,
-    border-color 180ms ease,
-    box-shadow 180ms ease;
-}
-
-.metric:hover,
-.metricWide:hover {
-  transform: translateY(-2px);
-  border-color: color-mix(
-    in srgb,
-    var(--color-primary) 35%,
-    var(--color-border)
-  );
 }
 
 .metricWide {
